@@ -20,7 +20,7 @@ int main(){
 	}
 	Aux = cab;
 	while(Aux != NULL){
-		cout << Aux ->x << Aux ->y <<endl;
+		cout << Aux ->x << " | " << Aux ->y <<endl;
 		Aux = Aux -> sig;
 	}
 	for(Aux = cab -> sig; Aux != NULL; Aux = Aux ->sig){
