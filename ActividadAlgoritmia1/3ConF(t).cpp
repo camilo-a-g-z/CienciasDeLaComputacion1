@@ -17,6 +17,7 @@ int main()
     double time_spent = 0.0;
  
     clock_t begin = clock();
+    /**************************************************************************/
     //Inicio codigo a medir
     int N, i, j;
 	nodo *cab = NULL, *Aux;
@@ -30,7 +31,7 @@ int main()
 	}
 	Aux = cab;
 	while(Aux != NULL){
-		cout << Aux ->x << " | " << Aux ->y <<endl;
+		//cout << Aux ->x << " | " << Aux ->y <<endl;
 		Aux = Aux -> sig;
 	}
 	for(Aux = cab -> sig; Aux != NULL; Aux = Aux ->sig){
@@ -38,6 +39,7 @@ int main()
 		cab= Aux;
 	}
     //Fin codigo a medir
+    /**************************************************************************/
     clock_t end = clock();
  
     // calcula el tiempo transcurrido encontrando la diferencia (end - begin) y
