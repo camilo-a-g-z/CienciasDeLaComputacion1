@@ -1,4 +1,4 @@
-//Metodo Burbuja
+//Metodo de inserccion
 
 #include <cstdlib>
 #include <iostream>
@@ -11,9 +11,9 @@ int main(){
 	unsigned t0, t1;
 	for(int q=10 ; q<=500;q +=10){
 		//variables para algoritmo
-	    int tam = q;
-	    int array[tam];
-		int i,j,aux;	
+		int tam = q;
+		int array[tam];
+		int i,pos,aux;
 		//rellenar arraglo
 		for(int w = 0; w<tam ; w++){
 			//peor caso
@@ -27,15 +27,16 @@ int main(){
 		}*/
 		t0 = clock();
 		/**************************************************************************/
-	    //Inicio codigo a medir
+		//inicio codigo a medir
 		for(i=0;i<tam;i++){
-			for(j=0;j<tam;j++){
-				if(array[j] > array[j+1]){
-					aux = array[j];
-					array[j] = array[j+1];
-					array[j+1] = aux;
-				}
+			pos = i; 
+			aux = array[i];
+			
+			while((pos>0) && (array[pos-1] > aux)){
+				array[pos] = array[pos-1];
+				pos--;
 			}
+			array[pos] = aux;
 		}
 		//Fin codigo a medir
 	    /**************************************************************************/
@@ -45,6 +46,5 @@ int main(){
 	    //cout << "Execution Time: " << time << endl;
 	    cout <<time << endl;
 	}
-    
 	return 0;
 }

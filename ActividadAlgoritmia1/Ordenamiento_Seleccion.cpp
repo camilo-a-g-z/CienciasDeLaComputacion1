@@ -1,4 +1,4 @@
-//Metodo Burbuja
+//Ordenamiento por Selección
 
 #include <cstdlib>
 #include <iostream>
@@ -11,15 +11,12 @@ int main(){
 	unsigned t0, t1;
 	for(int q=10 ; q<=500;q +=10){
 		//variables para algoritmo
-	    int tam = q;
-	    int array[tam];
-		int i,j,aux;	
+		int tam = q;
+		int array[tam];
+		int i,j,aux,min;
 		//rellenar arraglo
 		for(int w = 0; w<tam ; w++){
-			//peor caso
 			array[w] = tam - w;
-			//mejor caso
-			//array[w] =w;
 		}
 		//prueba de arreglo
 		/*for(int c=0;c<tam;c++){
@@ -27,15 +24,17 @@ int main(){
 		}*/
 		t0 = clock();
 		/**************************************************************************/
-	    //Inicio codigo a medir
+		//inicio codigo a medir
 		for(i=0;i<tam;i++){
-			for(j=0;j<tam;j++){
-				if(array[j] > array[j+1]){
-					aux = array[j];
-					array[j] = array[j+1];
-					array[j+1] = aux;
+			min = i;
+			for(j=i+1;j<tam;j++){
+				if(array[j] < array[min]){
+					min = j;
 				}
 			}
+			aux = array[i];
+			array[i] = array[min];
+			array[min] = aux;
 		}
 		//Fin codigo a medir
 	    /**************************************************************************/
@@ -45,6 +44,5 @@ int main(){
 	    //cout << "Execution Time: " << time << endl;
 	    cout <<time << endl;
 	}
-    
 	return 0;
 }
