@@ -6,23 +6,25 @@
 using namespace std;
 
 void cambioresiduos(int a[], int izq, int der, int b)
-{ int i,j;
- if (der>izq && b>0)
- {i= izq; j=der;
- while(j!=i)
- {
- while(!((a[i]>>b)&~(~0<<1))&& i<j)i++;
- while( ((a[j]>>b)&~(~0<<1)) && j>i)j--;
- //intercambio(a, i, j);
- int aux = a[i];
- a[i]=a[j];
- a[j]=aux;
- }
- //cout<<"Aqui"<<endl;
- if (!((a[i]>>b)&~(~0<<1))) j++;
- cambioresiduos(a, izq, j-1, b-1);
- cambioresiduos(a, j, der, b-1);
- }
+{ 
+	int i,j;
+	if (der>izq && b>0)
+	{
+		i= izq; j=der;
+		while(j!=i)
+	{
+	while(!((a[i]>>b)&~(~0<<1))&& i<j)i++;
+	while( ((a[j]>>b)&~(~0<<1)) && j>i)j--;
+	//intercambio
+	int aux = a[i];
+	a[i]=a[j];
+	a[j]=aux;
+	}
+	if (!((a[i]>>b)&~(~0<<1))) j++;
+	
+	cambioresiduos(a, izq, j-1, b-1);
+	cambioresiduos(a, j, der, b-1);
+	}
 }
 
 bool verificarRepetido(int valor, int indice, int a[]){
