@@ -4,40 +4,58 @@
 #include<windows.h>
 
 using namespace std;
-
-void mezcla(int list[], int start1, int end1, int start2, int end2){
-	int* result;
-	result = new int(end2-start1+1);
-	int finalStart = start1;
-	int finalEnd = end2;
-	int indexC = 0;
-	while((start1<=end1)&&(start2<=end2)){
-		if(list[start1] < list[start2]){
-			result[indexC]=list[start1];
-			start1=start1 + 1;
-		}else{
-			result[indexC]=list[start2];
-			start2=start2+1;
-		}
-		indexC = indexC +1;
-	}
-	if(start1<=end1){
-		for(int i = start1; i<end1;i++){
-			result[indexC]=list[i];
-			indexC=indexC+1;
-		}
-	}else{
-		for(int i = start2; i<end2;i++){
-			result[indexC]=list[i];
-			indexC=indexC+1;
-		}
-	}
-	indexC=1;
-	for(int i=finalStart;i<finalEnd;i++){
-		list[i]=result[indexC];
-		indexC=indexC+1;
-	}
-	delete[] result;
+/*funcion de mezcla tomada de https://www.geeksforgeeks.org/merge-sort/
+ *funcion propuesta en aula proporcionaba errores para arreglos mayores a 13
+ *como se puede ver en el git
+ *en el git https://github.com/camilo-a-g-z/CienciasDeLaComputacion1 
+ *commit 1ec0b377ad0021755e85ac2c2ccb255d59b7d01e
+*/
+void mezcla(int arr[], int l, int m, int r)
+{
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+ 
+    /* create temp arrays */
+    int L[n1], R[n2];
+ 
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1 + j];
+ 
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray
+    j = 0; // Initial index of second subarray
+    k = l; // Initial index of merged subarray
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        }
+        else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+ 
+    /* Copy the remaining elements of L[], if there
+    are any */
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+ 
+    /* Copy the remaining elements of R[], if there
+    are any */
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
 }
 
 
@@ -48,7 +66,7 @@ void margesort(int a[], int primero, int ultimo){
 		margesort(a,primero,central);//se organiza la sublista izq
 		margesort(a,central+1,ultimo);//se organiza la sublista der
 		//cout<<"Entramos a mezcla"<<endl;
-		mezcla(a,primero,central,central +1,ultimo);//ordenar los elementos del arreglo
+		mezcla(a,primero,central,ultimo);//ordenar los elementos del arreglo
 	}
 }
 
