@@ -5,39 +5,39 @@
 
 using namespace std;
 
-void mezcla(int a[], int izq, int medio, int der){
-	int* aux;
-	int i,k,z;
-	aux = new int(der-izq+1);
-	cout<<"Tamaño: "<<der-izq+1<<endl;
-	i = z = izq;
-	k = medio+1;
-	
-	//ordenamos los elementos en el arregloa aux
-	while(i<=medio && k<=der){
-		if(a[i] <= a[k]){
-			aux[z++] = a[i++];
+void mezcla(int list[], int start1, int end1, int start2, int end2){
+	int* result;
+	result = new int(end2-start1+1);
+	int finalStart = start1;
+	int finalEnd = end2;
+	int indexC = 0;
+	while((start1<=end1)&&(start2<=end2)){
+		if(list[start1] < list[start2]){
+			result[indexC]=list[start1];
+			start1=start1 + 1;
+		}else{
+			result[indexC]=list[start2];
+			start2=start2+1;
 		}
-		else{
-			aux[z++] = a[k++];
+		indexC = indexC +1;
+	}
+	if(start1<=end1){
+		for(int i = start1; i<end1;i++){
+			result[indexC]=list[i];
+			indexC=indexC+1;
+		}
+	}else{
+		for(int i = start2; i<end2;i++){
+			result[indexC]=list[i];
+			indexC=indexC+1;
 		}
 	}
-	
-	//ahora copiamos los elementos de la lista que no quedo vacia
-	while(i<=medio){
-		aux[z++] = a[i++];
+	indexC=1;
+	for(int i=finalStart;i<finalEnd;i++){
+		list[i]=result[indexC];
+		indexC=indexC+1;
 	}
-	while(k<=der){
-		aux[z++] = a[k++];
-	}
-	
-	//copiamos los elementos del arreglo aux al arreglo a
-	for(int i=izq; i <=der; i++){
-		cout<<"Izquierda: "<<der<<" Derecha: "<<izq<<endl;
-		a[i] = aux[i];
-	}
-	delete aux;
-	
+	delete[] result;
 }
 
 
@@ -47,7 +47,8 @@ void margesort(int a[], int primero, int ultimo){
 		central = (primero + ultimo)/2;
 		margesort(a,primero,central);//se organiza la sublista izq
 		margesort(a,central+1,ultimo);//se organiza la sublista der
-		mezcla(a,primero,central,ultimo);//ordenar los elementos del arreglo
+		//cout<<"Entramos a mezcla"<<endl;
+		mezcla(a,primero,central,central +1,ultimo);//ordenar los elementos del arreglo
 	}
 }
 
@@ -93,6 +94,7 @@ int main()
 		QueryPerformanceCounter(&nBeginTime);// Comienza a cronometrar
 		/**************************************************************************/
 		//inicio codigo a medir
+
 	    margesort(a,0,(q-1));
 	    /*for(int i=0;i<q;i++){
 	        cout<<a[i]<<endl;
