@@ -6,15 +6,10 @@
 using namespace std;
 
 void mezcla(int a[], int izq, int medio, int der){
-	
-	//int *aux;
-	//cout<<"Antes "<<der-izq+1<<endl;
-	//aux = new int[der-izq+1];
-	
-	
-	int aux[der - izq + 1];
-	
+	int* aux;
 	int i,k,z;
+	aux = new int(der-izq+1);
+	cout<<"Tamaño: "<<der-izq+1<<endl;
 	i = z = izq;
 	k = medio+1;
 	
@@ -38,12 +33,13 @@ void mezcla(int a[], int izq, int medio, int der){
 	
 	//copiamos los elementos del arreglo aux al arreglo a
 	for(int i=izq; i <=der; i++){
+		cout<<"Izquierda: "<<der<<" Derecha: "<<izq<<endl;
 		a[i] = aux[i];
 	}
-	//cout<<"Despues"<<endl;
-	//delete aux;
+	delete aux;
 	
 }
+
 
 void margesort(int a[], int primero, int ultimo){
 	int central;
