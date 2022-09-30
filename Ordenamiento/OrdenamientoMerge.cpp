@@ -16,19 +16,18 @@ void mezcla(int arr[], int l, int m, int r)
     int n1 = m - l + 1;
     int n2 = r - m;
  
-    /* create temp arrays */
+    // se crean arreglos base
     int L[n1], R[n2];
  
-    /* Copy data to temp arrays L[] and R[] */
+    //Se hace la copia a estos arreglos
     for (i = 0; i < n1; i++)
         L[i] = arr[l + i];
     for (j = 0; j < n2; j++)
         R[j] = arr[m + 1 + j];
- 
-    /* Merge the temp arrays back into arr[l..r]*/
-    i = 0; // Initial index of first subarray
-    j = 0; // Initial index of second subarray
-    k = l; // Initial index of merged subarray
+ 	//se realiza copia en subarrays
+    i = 0; // Primer indice de subarray
+    j = 0; // Primer indice de segundo subarray
+    k = l; // Primer indice de array mexclado
     while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
             arr[k] = L[i];
@@ -41,16 +40,14 @@ void mezcla(int arr[], int l, int m, int r)
         k++;
     }
  
-    /* Copy the remaining elements of L[], if there
-    are any */
+    //Se copia el de primer sub array
     while (i < n1) {
         arr[k] = L[i];
         i++;
         k++;
     }
  
-    /* Copy the remaining elements of R[], if there
-    are any */
+    ////Se copia el de segundo sub array
     while (j < n2) {
         arr[k] = R[j];
         j++;
