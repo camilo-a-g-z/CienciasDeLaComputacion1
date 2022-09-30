@@ -6,9 +6,15 @@
 using namespace std;
 
 void mezcla(int a[], int izq, int medio, int der){
-	int* aux;
+	
+	//int *aux;
+	//cout<<"Antes "<<der-izq+1<<endl;
+	//aux = new int[der-izq+1];
+	
+	
+	int aux[der - izq + 1];
+	
 	int i,k,z;
-	aux = new int(der-izq+1);
 	i = z = izq;
 	k = medio+1;
 	
@@ -34,7 +40,8 @@ void mezcla(int a[], int izq, int medio, int der){
 	for(int i=izq; i <=der; i++){
 		a[i] = aux[i];
 	}
-	delete aux;
+	//cout<<"Despues"<<endl;
+	//delete aux;
 	
 }
 
@@ -66,13 +73,15 @@ int main()
 {
 	//variables para generar aleatorios
 	int val;
+	int q=0;
+	int i=0;
 	srand(time(0));
-	for(int q=10 ; q<=500;q +=10){
+	for(q = 10 ; q<=500;q+=10){
 	    //arreglo a ordenar
-		cout<<"aqui"<<endl;
+		//cout<<"aqui"<<endl;
 	    int *a = new int[q];
 	    //bucle para llenar arreglo
-	    for(int i=0;i<q;i++){
+	    for(i=0;i<q;i++){
 	        do{
 	        	val = 1 + rand() % (q+5); 
 	        	//cout<<i<<endl;
@@ -89,16 +98,16 @@ int main()
 		/**************************************************************************/
 		//inicio codigo a medir
 	    margesort(a,0,(q-1));
-	    for(int i=0;i<q;i++){
+	    /*for(int i=0;i<q;i++){
 	        cout<<a[i]<<endl;
-	    }
+	    }*/
     	//Fin codigo a medir
 	    /**************************************************************************/
 		QueryPerformanceCounter(&nEndTime);// deja de cronometrar  
 		time=(double)(nEndTime.QuadPart-nBeginTime.QuadPart)/(double)nFreq.QuadPart;// Calcular la unidad de tiempo de ejecución del programa como s  
 		//cout<<"Tiempo de ejecución:"<<time*1000<<"ms"<<endl;
 		cout<<time<<endl;
-		//delete a;
+		delete a;
 	}
     return 0;
 }
