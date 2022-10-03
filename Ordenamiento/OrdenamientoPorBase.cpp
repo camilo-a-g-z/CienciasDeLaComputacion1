@@ -5,7 +5,7 @@
 
 using namespace std;
  
-// A utility function to get maximum value in arr[]
+//funcion para obtener el maximo del arreglo con n tamaño
 int getMax(int arr[], int n)
 {
     int mx = arr[0];
@@ -19,40 +19,36 @@ int getMax(int arr[], int n)
 // the digit represented by exp.
 void countSort(int arr[], int n, int exp)
 {
-    int output[n]; // output array
+    int output[n];
     int i, count[10] = { 0 };
  
-    // Store count of occurrences in count[]
+    // Se almacenan coincidencias en el contador
     for (i = 0; i < n; i++)
         count[(arr[i] / exp) % 10]++;
  
-    // Change count[i] so that count[i] now contains actual
-    //  position of this digit in output[]
+    // Cambio del contador para que ahora poseea la posicion actual del contador
     for (i = 1; i < 10; i++)
         count[i] += count[i - 1];
  
-    // Build the output array
+    // Se construye el nuevo arreglo
     for (i = n - 1; i >= 0; i--) {
         output[count[(arr[i] / exp) % 10] - 1] = arr[i];
         count[(arr[i] / exp) % 10]--;
     }
  
-    // Copy the output array to arr[], so that arr[] now
-    // contains sorted numbers according to current digit
+    // Se actualiza arreglo
     for (i = 0; i < n; i++)
         arr[i] = output[i];
 }
- 
-// The main function to that sorts arr[] of size n using
-// Radix Sort
+ //funcion principal
 void radixsort(int arr[], int n)
 {
-    // Find the maximum number to know number of digits
+    // Se obtiene el numero maximo
     int m = getMax(arr, n);
  
-    // Do counting sort for every digit. Note that instead
-    // of passing digit number, exp is passed. exp is 10^i
-    // where i is current digit number
+    // Se hace el orden de conteo por cada digito 
+    // implementando el exp ya que con este sabemos
+    // en que unidad (decena, centena, etc) esta
     for (int exp = 1; m / exp > 0; exp *= 10)
         countSort(arr, n, exp);
 }
@@ -87,7 +83,6 @@ int main()
 			}while(!verificarRepetido(val, i, a));
 			a[i] = val;
 	    }
-	    int n = q;
 	    //cout<<"Tam "<<sizeof(a)<<" and q: "<<q<<endl;
 	    //variables para cronometrar
 		double time=0;  
@@ -101,7 +96,7 @@ int main()
 
      
       	// Function Call
-      	radixsort(a, n);
+      	radixsort(a, q);
 	    /*for(int i=0;i<q;i++){
 	        cout<<a[i]<<endl;
 	    }*/
