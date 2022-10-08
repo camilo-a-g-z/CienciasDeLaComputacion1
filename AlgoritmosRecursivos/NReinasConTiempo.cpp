@@ -18,7 +18,7 @@ int main(){
 		cout<<"No se pudo abrir el archivo";
 		exit(1);
 	}
-	for(int q=4 ; q<=50;q++){
+	for(int q=4 ;;q++){
 		bool solucion;
 		N=q;
 		reinas = new int[q];
