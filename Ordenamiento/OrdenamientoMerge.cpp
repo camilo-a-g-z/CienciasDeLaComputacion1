@@ -1,3 +1,9 @@
+/*
+Integrantes:
+Miguel Angel Veloza Ortiz - 20192020012
+Camilo Andres Garcia Zambrano - 20201020047
+*/
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -117,8 +123,8 @@ int main()
     	//Fin codigo a medir
 	    /**************************************************************************/
 		QueryPerformanceCounter(&nEndTime);// deja de cronometrar  
-		time=(double)(nEndTime.QuadPart-nBeginTime.QuadPart)/(double)nFreq.QuadPart;// Calcular la unidad de tiempo de ejecución del programa como s  
-		//cout<<"Tiempo de ejecución:"<<time*1000<<"ms"<<endl;
+		time=(double)(nEndTime.QuadPart-nBeginTime.QuadPart)/(double)nFreq.QuadPart;// Calcular la unidad de tiempo de ejecuciï¿½n del programa como s  
+		//cout<<"Tiempo de ejecuciï¿½n:"<<time*1000<<"ms"<<endl;
 		cout<<time<<endl;
 		delete a;
 	}
