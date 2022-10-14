@@ -6,6 +6,6 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	//template < class T >  
-	Lista l;
+	Lista<int> l;
 	return 0;
 }

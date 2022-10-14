@@ -1,5 +1,6 @@
 #include <iostream>
-using namespace std;
+#ifndef PARQUEADERO_H
+#define PARQUEADERO_H
 
 template < class T >  
 //Estructura a emplear para lista
@@ -27,3 +28,4 @@ class Lista
 		T Eliminar(int pos);
 		T ObtenerDatos(int pos);
 };
+#endif

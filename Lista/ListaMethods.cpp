@@ -37,3 +37,17 @@ bool Lista::Insertar(T dato, int pos){
 	tam++;
 	return true;
 }
+
+template < class T >  
+T Lista::Eliminar(int pos){
+	if(pos > tam + 1){return null;}
+	Nodo *aux, *aux2;
+	Nodo n_d = new Noto<T>;
+	for(int i = 1; i < pos-1; i++){aux = aux->sig;}
+	aux2 = aux->sig;
+	aux->sig = aux2->sig;
+	n_d->info = aux2->info;
+	n_d->sig = aux2->sig;
+	delete aux2;
+	return n_d;
+}
