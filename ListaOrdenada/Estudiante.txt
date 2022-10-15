@@ -1,0 +1,3 @@
+Camilo Andres Garcia Zambrano - 20201020047
+En caso de presentar algun problema con el ZIP, el codigo se encuentra en mi repo:
+https://github.com/camilo-a-g-z/CienciasDeLaComputacion1/tree/master/ListaOrdenada
