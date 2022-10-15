@@ -14,27 +14,39 @@ int main(int argc, char** argv) {
 	enteros.Insertar(3);
 	enteros.Insertar(12);
 	enteros.Insertar(10);	
+	cout<<"Lista completa: ";
 	enteros.mostrar();
-	enteros.Eliminar(2);
-	cout<<enteros.TamLista()<<" Dato 3: "<<enteros.ObtenerDatos(3) <<endl;
+	cout<<"Se elimina un dato: "<<enteros.Eliminar(2)<<endl;
+	cout<<"Tamaño: "<<enteros.TamLista()<<endl;
+	cout<<"Lista actual: ";
 	enteros.mostrar();
+	
+	cout<<endl;
 	
 	reales.Insertar(6.2);
 	reales.Insertar(9.5);
 	reales.Insertar(3.8);
 	reales.Insertar(12.0);
 	reales.Insertar(10.9);
-	reales.Eliminar(2);
-	cout<<reales.TamLista()<<" Dato 3: "<<reales.ObtenerDatos(3) <<endl;
+	cout<<"Lista completa: ";
 	reales.mostrar();
+	cout<<"Se elimina un dato: "<<reales.Eliminar(3)<<endl;
+	cout<<"Tamaño: "<<reales.TamLista()<<endl;
+	cout<<"Lista actual: ";
+	reales.mostrar();
+	
+	cout<<endl;
 	
 	caracteres.Insertar('a');
 	caracteres.Insertar('c');
 	caracteres.Insertar('f');
 	caracteres.Insertar('m');
 	caracteres.Insertar('p');
-	caracteres.Eliminar(2);
-	cout<<enteros.TamLista()<<" Dato 3: "<<caracteres.ObtenerDatos(3) <<endl;
+	cout<<"Lista completa: ";
+	caracteres.mostrar();
+	cout<<"Se elimina un dato: "<<caracteres.Eliminar(4)<<endl;
+	cout<<"Tamaño: "<<caracteres.TamLista()<<endl;
+	cout<<"Lista actual: ";
 	caracteres.mostrar();
 	return 0;
 }
