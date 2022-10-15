@@ -32,7 +32,7 @@ class Lista
 		bool ListaVacia();
 		int TamLista();
 		bool Insertar(T dato, int pos);
-		bool Eliminar(int pos);
+		T Eliminar(int pos);
 		T ObtenerDatos(int pos);
 		void mostrar();
 };
@@ -52,9 +52,9 @@ T Lista<T>::ObtenerDatos(int pos){
 }
 
 template < class T >  
-bool Lista<T>::Eliminar(int pos){
+T Lista<T>::Eliminar(int pos){
 	//en el caso de que estemos pidiendo un lugar que no se puede
-	if(pos > tam + 1){return false;}
+	if(pos > tam + 1){return NULL;}
 	//se crea nuevo nodo y variables auxiliares necesarias
 	Nodo<T> *n_n = new Nodo<T>;
 	Nodo<T> *aux, *aux2;
@@ -65,7 +65,7 @@ bool Lista<T>::Eliminar(int pos){
 	aux->sig = aux2->sig;
 	delete aux2;
 	tam --;
-	return true;
+	return n_n->info;
 }
 
 template < class T >  
