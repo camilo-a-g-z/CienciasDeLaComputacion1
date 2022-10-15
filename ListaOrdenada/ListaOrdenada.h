@@ -1,8 +1,9 @@
 #include <iostream>
-#ifndef LISTA_H
-#define LISTA_H
+#ifndef LISTA_ORDENADA_H
+#define LISTA_ORDENADA_H
 using namespace std;
 //TAREA :
+//Utilizar centinelas y cabeceras
 //Lista ordenada, imprimirla, eliminar elementos y volver a imprimir en MAIN
 template < class T >  
 //Estructura a emplear para lista
@@ -31,7 +32,7 @@ class Lista
 		//~Lista<T>();
 		bool ListaVacia();
 		int TamLista();
-		bool Insertar(T dato, int pos);
+		bool Insertar(T dato);
 		bool Eliminar(int pos);
 		T ObtenerDatos(int pos);
 		void mostrar();
@@ -81,20 +82,21 @@ void Lista<T>::mostrar(){
 }
 
 template < class T >  
-bool Lista<T>::Insertar(T dato, int pos){
-	//en el caso de que estemos pidiendo un lugar que no se puede
-	if(pos > tam + 1){return false;}
+bool Lista<T>::Insertar(T dato){
 	//se crea nuevo nodo y variables auxiliares necesarias
 	Nodo<T> *n_n = new Nodo<T>;
 	Nodo<T> *aux, *aux2;
 	
 	n_n->info = dato;
-	aux = cab;
-	
-	for(int i = 0; i < pos-1; i++){aux = aux->sig;}
-	aux2 = aux->sig;
-	n_n->sig = aux2;
-	aux->sig = n_n;
+	aux = cab->sig;
+	aux2 = cab;
+	while(aux->sig != NULL && aux->info < dato)
+	{
+		aux2 = aux;
+		aux = aux->sig;
+	}
+	aux2->sig = n_n;
+	n_n->sig = aux;
 	
 	tam++;
 	return true;

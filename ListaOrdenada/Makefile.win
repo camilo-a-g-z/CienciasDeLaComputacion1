@@ -1,4 +1,4 @@
-# Project: Lista
+# Project: ListaOrdenada
 # Makefile created by Dev-C++ 5.11
 
 CPP      = g++.exe
