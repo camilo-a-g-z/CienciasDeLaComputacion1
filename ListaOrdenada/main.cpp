@@ -5,18 +5,16 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	//template < class T >  
-	
 	Lista<int> enteros ;
 	Lista<float> reales;
 	Lista<char> caracteres;
+	
 	enteros.Insertar(6,1);
 	enteros.Insertar(9,1);
 	enteros.Insertar(3,2);
 	enteros.Insertar(12,4);
 	enteros.Insertar(10,4);	
-	enteros.Eliminar(2);
 	cout<<enteros.TamLista()<<endl;
-	enteros.mostrar();
 	
 	reales.Insertar(6.2,1);
 	reales.Insertar(9.5,1);
