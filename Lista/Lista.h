@@ -46,7 +46,10 @@ int Lista<T>::TamLista(){return tam;}
 
 template < class T >  
 T Lista<T>::ObtenerDatos(int pos){
-	
+	Nodo<T> *aux;
+	aux = cab->sig;
+	for(int i = 1; i < pos; i++){aux = aux->sig;}
+	return aux->info;
 }
 
 template < class T >  

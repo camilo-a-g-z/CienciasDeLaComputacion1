@@ -14,8 +14,9 @@ int main(int argc, char** argv) {
 	enteros.Insertar(3,2);
 	enteros.Insertar(12,4);
 	enteros.Insertar(10,4);	
+	enteros.mostrar();
 	enteros.Eliminar(2);
-	cout<<enteros.TamLista()<<endl;
+	cout<<enteros.TamLista()<<" Dato 3: "<<enteros.ObtenerDatos(3) <<endl;
 	enteros.mostrar();
 	
 	reales.Insertar(6.2,1);
@@ -23,14 +24,18 @@ int main(int argc, char** argv) {
 	reales.Insertar(3.8,2);
 	reales.Insertar(12.0,4);
 	reales.Insertar(10.9,4);
-	cout<<reales.TamLista()<<endl;
+	reales.Eliminar(2);
+	cout<<reales.TamLista()<<" Dato 3: "<<reales.ObtenerDatos(3) <<endl;
+	reales.mostrar();
 	
 	caracteres.Insertar('a',1);
 	caracteres.Insertar('c',2);
 	caracteres.Insertar('f',2);
 	caracteres.Insertar('m',4);
 	caracteres.Insertar('p',3);
-	cout<<caracteres.TamLista()<<endl;
+	caracteres.Eliminar(2);
+	cout<<enteros.TamLista()<<" Dato 3: "<<caracteres.ObtenerDatos(3) <<endl;
+	caracteres.mostrar();
 	return 0;
 }
 
