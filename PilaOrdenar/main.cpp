@@ -4,7 +4,7 @@ using namespace std;
 
 /*
 Orden des  Orden Asc    Resultado
-| 10|       | 6 |         	| 9 |
+| 5 |       | 6 |         	| 9 |
 | 4 |       | 7 |			| 8 |
 | 3 |       | 8 |			| 7 |
 | 2 |       | 9 |			| 6 |
@@ -20,27 +20,28 @@ Pila<T> ordenar(Pila<T> oD, Pila<T> oA){
 	T aux1, aux2;
 	Pila<int> aux(100);
 	Pila<int> auxInterno(100);
-	if(!oD.vacia()){
-		while(!oD.vacia())	{auxInterno.meter(oD.sacar());}
+	if(!oA.vacia()){
+		while(!oA.vacia())	{auxInterno.meter(oA.sacar());}
 	}
-	while( !auxInterno.vacia() || !oA.vacia() ){
+	while( !auxInterno.vacia() || !oD.vacia() ){
 		//en caso de que solo este la pila de orden descendente llena
-		if(oA.vacia()){
+		if(oD.vacia()){
 			while(!auxInterno.vacia())	{aux.meter(auxInterno.sacar());}
 		}else if(auxInterno.vacia()){
-			while(!oA.vacia())	{aux.meter(oA.sacar());}
+			while(!oD.vacia())	{aux.meter(oD.sacar());}
 		}else{
 			aux1 = auxInterno.sacar();
-			aux2 = oA.sacar();
-			if(aux1<aux2){
+			aux2 = oD.sacar();
+			if(aux1>aux2){
 				aux.meter(aux1);
-				oA.meter(aux2);
+				oD.meter(aux2);
 			}else{
 				aux.meter(aux2);
 				auxInterno.meter(aux1);
 			}
 		}
 	}
+	
 	return aux;
 }
 
