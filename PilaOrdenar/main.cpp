@@ -1,3 +1,9 @@
+/*
+Integrantes: 
+	Camilo Andres Garcia Zambrano(20201020047)
+	Miguel Angel Veloza Ortiz(20192020012)
+*/
+
 #include <iostream>
 #include "PILA.h"
 using namespace std;
