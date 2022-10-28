@@ -54,10 +54,14 @@ for(j=1; j<tam/3; j++)
     }
   }
 if(tam % 2 ==0){
-	j=tam+1-tam/2;
-}else
+	if(tam % 4 != 0){
+		j=((tam+1)-tam/2)-1;
+	}else{
+		j=((tam+1)-tam/2);
+	}
+}else{
 	j=tam-tam/2;
-
+}
 for (i=1; i<=j; i++)
    {x=Cola.AtenderCola();}
 cout<<"La figura elegida es: "<< x<<endl; 
