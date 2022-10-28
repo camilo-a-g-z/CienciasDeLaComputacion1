@@ -24,9 +24,6 @@ void reemplazar(Pila<T> x, T valA, T valN){
 int main(int argc, char** argv) {
 	//template < class T >  ;
 	Pila<int> acc(5);
-	acc.meter(5);
-	acc.meter(50);
-	acc.meter(2);
 	reemplazar(acc, 5, 10);
 	while(!acc.vacia()){
 		cout<<acc.sacar()<<endl;
