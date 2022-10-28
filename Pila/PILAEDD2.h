@@ -17,4 +17,3 @@ class Pila
 		  {return !p;} 
 };
 #endif
-

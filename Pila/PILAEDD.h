@@ -41,3 +41,4 @@ int Pila::vacia()
 {return cabeza->siguiente == z;}
 
 #endif
+
