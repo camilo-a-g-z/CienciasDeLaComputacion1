@@ -20,9 +20,7 @@ void reemplazar(Pila<T> x, T valA, T valN){
 		if(datoAux == valA){
 			aux.sacar();
 			x.meter(valN);
-			while(!aux.vacia()){
-				x.meter(aux.sacar());
-			}
+			reemplazar(x,valA,valN);
 		}
 	}
 }
@@ -30,11 +28,12 @@ void reemplazar(Pila<T> x, T valA, T valN){
 int main(int argc, char** argv) {
 	//template < class T >  ;
 	Pila<int> acc(5);
-	acc.meter(4);
+	acc.meter(5);
 	acc.meter(423);	
 	acc.meter(5);
 	acc.meter(14);
 	acc.meter(22);
+	acc.meter(5);
 	reemplazar(acc, 5, 10);
 	while(!acc.vacia()){
 		cout<<acc.sacar()<<endl;
