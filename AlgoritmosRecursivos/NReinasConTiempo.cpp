@@ -10,7 +10,7 @@ void mostrarTablero();
 int N = 0;
 int *reinas;
 
-int main(){
+int main(){  
 	ofstream archivo;
 	archivo.open("NReinasResultados.txt",ios::out); //Creamos el archivo
 	

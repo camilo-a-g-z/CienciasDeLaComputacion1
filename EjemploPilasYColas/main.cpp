@@ -14,7 +14,7 @@ pila Pila[3];
  char x; 
   
  do{
-   cout<<"Escriba un mùltiplo de 3: ";
+   cout<<"Escriba un m\xa3ltiplo de 3: ";
    cin>> tam;}
  while (tam%3!=0);
  i=1;
@@ -28,7 +28,7 @@ pila Pila[3];
         i++; x++;
        }
   }
- cout<<"mire cuidadosamente los sìmbolos y elija uno\n";
+ cout<<"Mire cuidadosamente los s\xa1mbolos y elija uno\n";
 
 for(j=1; j<tam/3; j++)
  {cout<<"  Gr1  "<<"Gr2  "<<"Gr3  "<<endl;
@@ -41,7 +41,7 @@ for(j=1; j<tam/3; j++)
     cout<<"\n"; 
     }
  
-   cout<< "elija el grupo en el que quedò el sìmbolo elegido (1, 2 o 3): ";
+   cout<< "Elija el grupo en el que qued\xa2 el s\xa1mbolo elegido (1, 2 o 3): ";
   cin>> grupo;
   switch(grupo){
          case 1 : {orden[0]=1; orden[1]=0; orden[2]=2;break;}
@@ -53,9 +53,15 @@ for(j=1; j<tam/3; j++)
         {Cola.InsCola(Pila[orden[i]].Pop());}
     }
   }
-
-j=tam-tam/2;
-
+if(tam % 2 ==0){
+	if(tam % 4 != 0){
+		j=((tam+1)-tam/2)-1;
+	}else{
+		j=((tam+1)-tam/2);
+	}
+}else{
+	j=tam-tam/2;
+}
 for (i=1; i<=j; i++)
    {x=Cola.AtenderCola();}
 cout<<"La figura elegida es: "<< x<<endl; 
