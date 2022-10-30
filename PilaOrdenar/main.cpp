@@ -7,7 +7,9 @@ Integrantes:
 #include <iostream>
 #include "PILA.h"
 using namespace std;
-
+Pila<int> oD(5);
+Pila<int> oA(5);
+int i=0;
 /*
 Orden des  Orden Asc    Resultado
 | 5 |       | 6 |         	| 9 |
@@ -21,53 +23,73 @@ Orden des  Orden Asc    Resultado
 							| _ |
 */
 
-template < class T >  
-Pila<T> ordenar(Pila<T> oD, Pila<T> oA){
-	T aux1, aux2;
-	Pila<int> aux(100);
-	Pila<int> auxInterno(100);
+template < class T >
+void volverAsc(Pila<T> mD){
+	T aux1;
 	if(!oA.vacia()){
-		while(!oA.vacia())	{auxInterno.meter(oA.sacar());}
+		aux1 = oA.sacar();
+		volverAsc(mD);
+		oD.meter(aux1);
+		i++;
 	}
-	while( !auxInterno.vacia() || !oD.vacia() ){
-		//en caso de que solo este la pila de orden descendente llena
+}
+template < class T >  
+void ordenar2(Pila<T> mD, Pila<T> mA){
+	T aux1, aux2;
+	//oD.meter(222);
+	if(!oD.vacia() || !oA.vacia()){
 		if(oD.vacia()){
-			while(!auxInterno.vacia())	{aux.meter(auxInterno.sacar());}
-		}else if(auxInterno.vacia()){
-			while(!oD.vacia())	{aux.meter(oD.sacar());}
+			//cout<<"Entro"<<endl;
+			aux1 = oA.sacar();
+			ordenar2(mD,mA);
+			//cout<<aux1<<endl;
+			oD.meter(aux1);
+			//cout<<"Sacando: "<<oD.sacar()<<endl;;
+		}else if(oA.vacia()){
+			aux1 = oD.sacar();
+			ordenar2(oD,oA);
+			oD.meter(aux1);
 		}else{
-			aux1 = auxInterno.sacar();
+			aux1 = oA.sacar();
 			aux2 = oD.sacar();
 			if(aux1>aux2){
-				aux.meter(aux1);
 				oD.meter(aux2);
+				ordenar2(oD,oA);
+				oD.meter(aux1);
 			}else{
-				aux.meter(aux2);
-				auxInterno.meter(aux1);
+				oA.meter(aux1);
+				ordenar2(oD,oA);
+				oD.meter(aux2);
 			}
 		}
 	}
-	
-	return aux;
 }
-
 int main(int argc, char** argv) {
 	//template < class T >  ;
-	Pila<int> oD(5);
+	
 	oD.meter(14);
 	oD.meter(16);
 	oD.meter(18);
 	oD.meter(20);
 	
-	Pila<int> oA(5);
+	
 	oA.meter(19);
 	oA.meter(17);
 	oA.meter(15);
 	oA.meter(13);
-	
-	Pila<int> res = ordenar(oD,oA);
-	while(!res.vacia()){
-		cout<<res.sacar()<<endl;
+	volverAsc(oD);
+	while(i!=0){
+		oA.meter(oD.sacar());
+		i--;
+	}
+	ordenar2(oD,oA);
+	cout<<"oD"<<endl;
+	while(!oD.vacia()){
+		cout<<oD.sacar()<<endl;
+	}
+	cout<<"oA"<<endl;
+	while(!oA.vacia()){
+		cout<<oA.sacar()<<endl;
 	}
 	return 0;
 }
