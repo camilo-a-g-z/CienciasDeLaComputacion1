@@ -6,6 +6,7 @@ Integrantes:
 
 #include <iostream>
 #include "PILA.h"
+#include <stdlib.h>
 using namespace std;
 /*
 * Nota importante: Por configuracion de c++, templates + punteros + recursion no se
@@ -85,6 +86,7 @@ void ordenar2(Pila<T> mD, Pila<T> mA){
 	}
 }
 int main(int argc, char** argv) {
+	fflush(stdin);
 	//se ingresan datos de manera descendente 
 	oD.meter(10);
 	oD.meter(12);
