@@ -87,14 +87,14 @@ void ordenar2(Pila<T> mD, Pila<T> mA){
 int main(int argc, char** argv) {
 	//se ingresan datos de manera descendente 
 	oD.meter(10);
-	oD.meter(20);
-	oD.meter(30);
-	oD.meter(40);
+	oD.meter(12);
+	oD.meter(14);
+	oD.meter(16);
 	//se ingresan datos de manera ascendente	
-	oA.meter(8);
-	oA.meter(7);
-	oA.meter(6);
-	oA.meter(5);
+	oA.meter(17);
+	oA.meter(15);
+	oA.meter(13);
+	oA.meter(11);
 	//se organiza la pila ascendete
 	volverAsc(oD, oA);
 	//se ordena
