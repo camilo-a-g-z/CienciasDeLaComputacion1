@@ -1,0 +1,8 @@
+Integrantes: 
+	Camilo Andres Garcia Zambrano(20201020047)
+	Miguel Angel Veloza Ortiz(20192020012)
+El punto 1 corresponde al proyecto dentro de la carpeta PilaPlantilla
+El punto 2 corresponde al proyecto dentro de la carpeta PilaOrdenar
+
+El codigo presenta un error de acceso a memoria la primera vez que se ejecute, basta con una pequeña modificacion por ejemplo cambiar el numero que se agrega a a la pila.
+(Nota: Ya comente con el monitor el caso por lo que esta al tanto)

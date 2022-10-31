@@ -6,6 +6,7 @@ Integrantes:
 
 #include <iostream>
 #include "PILA.h"
+#include <stdlib.h>
 using namespace std;
 
 template < class T >  
@@ -26,7 +27,7 @@ void reemplazar(Pila<T> x, T valA, T valN){
 }
 
 int main(int argc, char** argv) {
-	//template < class T >  ;
+	fflush(stdin);
 	Pila<int> acc(5);
 	acc.meter(5);
 	acc.meter(423);	
@@ -35,6 +36,7 @@ int main(int argc, char** argv) {
 	acc.meter(22);
 	acc.meter(5);
 	reemplazar(acc, 5, 10);
+	cout<<"Se remplaza el 5 por el 10:"<<endl;
 	while(!acc.vacia()){
 		cout<<acc.sacar()<<endl;
 	}
