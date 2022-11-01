@@ -32,8 +32,8 @@ class Queue
 		//~Queue<T>();
 		bool QueueVacia();
 		int TamQueue();
-		void enQueue(T dato, int pos);
-		T deQueue(int pos);
+		void enQueue(T dato, char lado);
+		T deQueue(char lado);
 		void imprimir_queue(char lado);
 };
 
@@ -44,7 +44,7 @@ template < class T >
 int Queue<T>::TamQueue(){return tam;}
 
 template < class T >  
-T Queue<T>::dequeue(int pos){
+T Queue<T>::deQueu(char lado){
 	
 }
 
@@ -54,7 +54,7 @@ void Queue<T>::imprimir_queue(char lado){
 }
 
 template < class T >  
-void Queue<T>::enQueue(T dato){
+void Queue<T>::enQueue(T dato, char lado){
 	
 	return true;
 }
