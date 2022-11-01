@@ -10,6 +10,7 @@ struct Nodo
 {
 	T info;
 	Nodo<T> *sig;
+	Nodo<T> *ant;
 };
 //Template de tipo dato a usar
 template < class T >  
@@ -31,9 +32,9 @@ class Queue
 		//~Queue<T>();
 		bool QueueVacia();
 		int TamQueue();
-		bool enQueue(T dato, int pos);
+		void enQueue(T dato, int pos);
 		T deQueue(int pos);
-		void imprimir_queue();
+		void imprimir_queue(char lado);
 };
 
 template < class T >  
@@ -43,57 +44,18 @@ template < class T >
 int Queue<T>::TamQueue(){return tam;}
 
 template < class T >  
-T Queue<T>::ObtenerDatos(int pos){
-	Nodo<T> *aux;
-	aux = cab->sig;
-	for(int i = 1; i < pos; i++){aux = aux->sig;}
-	return aux->info;
+T Queue<T>::dequeue(int pos){
+	
 }
 
 template < class T >  
-T Queue<T>::Eliminar(int pos){
-	//en el caso de que estemos pidiendo un lugar que no se puede
-	if(pos > tam + 1){return NULL;}
-	//se crea nuevo nodo y variables auxiliares necesarias
-	Nodo<T> *n_n = new Nodo<T>;
-	Nodo<T> *aux, *aux2;
-	aux = cab;
-	for(int i = 0; i < pos-1; i++){aux = aux->sig;}
-	aux2 = aux->sig;
-	n_n->info = aux2->info;
-	aux->sig = aux2->sig;
-	delete aux2;
-	tam --;
-	return n_n->info;
+void Queue<T>::imprimir_queue(char lado){
+	
 }
 
 template < class T >  
-void Queue<T>::mostrar(){
-	Nodo<T> *aux;
-	aux = cab->sig;
-	while(aux->sig != NULL) 
-	{
-		cout<<aux->info<<" | ";
-		aux = aux->sig;
-	}
-	cout<<endl;
-}
-
-template < class T >  
-bool Queue<T>::enQueue(T dato){
-	//se crea nuevo nodo y variables auxiliares necesarias
-	Nodo<T> *n_n = new Nodo<T>;
-	Nodo<T> *aux, *aux2;
+void Queue<T>::enQueue(T dato){
 	
-	n_n->info = dato;
-	aux = cab;
-	
-	for(int i = 0; i < pos-1; i++){aux = aux->sig;}
-	aux2 = aux->sig;
-	n_n->sig = aux2;
-	aux->sig = n_n;
-	
-	tam++;
 	return true;
 }
 
