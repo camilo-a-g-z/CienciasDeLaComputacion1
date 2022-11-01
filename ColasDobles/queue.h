@@ -45,6 +45,7 @@ bool Queue<T>::QueueVacia(){return (tam == 0);}
 
 template < class T >  
 int Queue<T>::TamQueue(){return tam;}
+
 //atender la bicola
 template < class T >  
 T Queue<T>::deQueu(char lado){
@@ -60,7 +61,7 @@ template < class T >
 void Queue<T>::enQueue(T dato, char lado){
 	Nodo<T> *n_n = new Nodo<T>;
 	n_n->info = dato;
-	if(lado == 'I'){
+	if(lado == 'D'){
 		n_n->sig = cab->sig;
 		n_n->ant = cab;
 		cab->sig->ant = n_n;
