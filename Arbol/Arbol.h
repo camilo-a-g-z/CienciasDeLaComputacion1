@@ -30,13 +30,18 @@ class Arbol
 		Nodo *buscar_nodo(Nodo *, int);
 	public: 
 		Arbol(){
+			raiz = NULL;
 		}
 		Nodo *buscar_nodo_p(int);
 		void insertar_nodo_p(int, int);
 		void mostrar_arbol_p();
 		void eliminar_p(int);
+		bool arbol_vacio();
 };
-//Metodo para eliminar publico, se creo este metodo para simplificar acceso
+//funcion para saber si el arbol esta vacio
+bool Arbol::arbol_vacio(){return raiz == NULL ? true : false;}
+
+//Metodo para buscar nodo publico, se creo este metodo para simplificar acceso
 //desde fuerda de la clase y lograr hacer un metodo recursivo
 Nodo *Arbol::buscar_nodo_p(int n){
 	return buscar_nodo(raiz,n);

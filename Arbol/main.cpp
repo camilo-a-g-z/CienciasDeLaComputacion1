@@ -7,6 +7,7 @@ using namespace std;
 
 int main(){
 	Arbol a;
+	cout<<"Arbol esta vacio? "<<a.arbol_vacio()<<endl;
 	a.insertar_nodo_p(15,1);
 	a.insertar_nodo_p(51,1);
 	a.insertar_nodo_p(5,1);
@@ -40,6 +41,7 @@ int main(){
 	*/
 	i = n->der->dato;
 	cout<<"Buscando un nodo: "<<i<<endl;
+	cout<<"Arbol esta vacio? "<<a.arbol_vacio()<<endl;
 	return 0;
 }
 
