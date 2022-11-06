@@ -7,19 +7,19 @@ struct Nodo{
 	int dato;
 	Nodo *der;
 	Nodo *izq;
-	Nodo *padre;
 };
 
 class Arbol
 {
 	private:
-		Nodo *arbol;
+		Nodo *raiz;
+		Nodo *padre_act;
 		
 	public: 
 		Arbol(){
 		}
-		Nodo *crear_nodo(int, Nodo *);
-		void insertar_nodo(Nodo *&, int , Nodo *);
+		Nodo *crear_nodo(int);
+		void insertar_nodo(Nodo *&, int);
 		void mostrar_arbol(Nodo *, int);
 		bool buscar_nodo(Nodo *, int);
 		Nodo *buscar_padre(Nodo *, int);
@@ -27,37 +27,48 @@ class Arbol
 		void in_orden(Nodo *);
 		void post_orden(Nodo *);
 		void eliminar(Nodo *, int);
-		void eliminar_nodo(Nodo *);
+		void eliminar_nodo(Nodo *, Nodo*);
 		Nodo *minimo(Nodo *);
 		void reemplazar(Nodo *, Nodo *);
 		void destruir(Nodo *);
+		void insertar_nodo_p(int);
+		void mostrar_arbol_p();
+		void eliminar_p(int n);
 };
-
+void Arbol::eliminar_p(int n){
+	eliminar(raiz,n);
+}
+void Arbol::mostrar_arbol_p(){
+	mostrar_arbol(raiz,0);
+}
 //funcion para crear un nuevo nodo
-Nodo *Arbol::crear_nodo(int n, Nodo *padre){
+Nodo *Arbol::crear_nodo(int n){
 	Nodo *nuevo_nodo = new Nodo ();
 	
 	nuevo_nodo->dato = n;
 	nuevo_nodo->der = NULL;
 	nuevo_nodo->izq = NULL;
-	nuevo_nodo->padre = padre;
 	
 	return nuevo_nodo;
 }
 
+void Arbol::insertar_nodo_p(int n){
+	insertar_nodo(raiz,n);
+}
+
 //funcion para asignar valor a nodo
-void Arbol::insertar_nodo(Nodo *&arbol, int n, Nodo *padre){
+void Arbol::insertar_nodo(Nodo *&arbol, int n){
 	
 	if(arbol == NULL){ //sie el arbol esta vacio
-		Nodo *nuevo_nodo = crear_nodo(n,padre);
+		Nodo *nuevo_nodo = crear_nodo(n);
 		arbol = nuevo_nodo;
 		cout<<"\nElemento "<<n<<" insertado correctamente."<<endl;
 	}else{//si el arbol tiene un nodo o mas de un nodo
 		int valRaiz = arbol->dato; //obtenemos el valor de la raiz
 		if(n<valRaiz){//si el elemento es menor a la raiz lo insertamos a la izquierda
-			insertar_nodo(arbol->izq,n,arbol);
+			insertar_nodo(arbol->izq,n);
 		}else{//si el elemento es mayor de la raiz lo insertamos a la derecha
-			insertar_nodo(arbol->der,n,arbol);
+			insertar_nodo(arbol->der,n);
 		}
 	}
 }
@@ -144,13 +155,16 @@ void Arbol::post_orden(Nodo *arbol){
 	}
 }
 //funcion para eliminar nodo encontrado
-void Arbol::eliminar_nodo(Nodo *nodo_eliminar){
+void Arbol::eliminar_nodo(Nodo *nodo_eliminar, Nodo *padre){
 	if(nodo_eliminar->der &&nodo_eliminar->izq){//si el arbol tiene hiho izq y der
 		Nodo *menor = minimo(nodo_eliminar->der);
-		nodo_eliminar->dato = menor->dato;
-		eliminar_nodo(menor);
+		Nodo *padre_i = buscar_padre(raiz,nodo_eliminar->dato);
+		int d = menor->dato;
+		eliminar_nodo(menor, padre_i);
+		nodo_eliminar->dato = d;
 	}
 	else if(nodo_eliminar->izq){//si tiene hijo izquierdo
+		Nodo *padre_i = buscar_padre(raiz,nodo_eliminar->dato);
 		reemplazar(nodo_eliminar, nodo_eliminar->izq);
 		destruir(nodo_eliminar);
 		cout<<"\nElemento destruido correctamente."<<endl;
@@ -178,7 +192,7 @@ void Arbol::eliminar(Nodo *arbol, int n){
 		eliminar(arbol->der,n);//buscar por la der
 	}
 	else{//si ya encontraste el elemento
-		eliminar_nodo(arbol);
+		eliminar_nodo(arbol,NULL);
 	}
 }
 //funcion para determinar el nodo mas izquierdo posible
@@ -194,17 +208,14 @@ Nodo *Arbol::minimo(Nodo *arbol){
 }
 //funcion para reeemplazar dos nodos
 void Arbol::reemplazar(Nodo *arbol, Nodo *nuevo_nodo){
-	if(arbol->padre){
+	Nodo *padre = buscar_padre(raiz,arbol->dato);
+	if(padre != NULL){
 		//arbol->padre hay que asignarle su nuevo hijo
-		if(arbol->dato == arbol->padre->izq->dato){
-			arbol->padre->izq = nuevo_nodo;
-		}else if(arbol->dato == arbol->padre->der->dato){
-			arbol->padre->der = nuevo_nodo;	
+		if(arbol->dato == padre->izq->dato){
+			padre->izq = nuevo_nodo;
+		}else if(arbol->dato == padre->der->dato){
+			padre->der = nuevo_nodo;	
 		}
-	}
-	if(nuevo_nodo){
-		//procedemos a asignarle su nuvo padre
-		nuevo_nodo->padre = arbol->padre;
 	}
 }
 //funcion para destruir un nodo
