@@ -4,7 +4,9 @@
 using namespace std;
 
 struct Nodo{
+	//segun tarea es el ID
 	int dato;
+	int info;
 	Nodo *der;
 	Nodo *izq;
 };
@@ -14,8 +16,8 @@ class Arbol
 	private:
 		Nodo *raiz;
 		Nodo *padre_act;
-		Nodo *crear_nodo(int);
-		void insertar_nodo(Nodo *&, int);
+		Nodo *crear_nodo(int, int);
+		void insertar_nodo(Nodo *&, int, int);
 		void mostrar_arbol(Nodo *, int);
 		bool buscar_nodo(Nodo *, int);
 		Nodo *buscar_padre(Nodo *, int);
@@ -30,7 +32,7 @@ class Arbol
 	public: 
 		Arbol(){
 		}
-		void insertar_nodo_p(int);
+		void insertar_nodo_p(int, int);
 		void mostrar_arbol_p();
 		void eliminar_p(int);
 };
@@ -46,30 +48,31 @@ void Arbol::mostrar_arbol_p(){
 }
 //Metodo para insertar publico, se creo este metodo para simplificar acceso
 //desde fuerda de la clase y lograr hacer un metodo recursivo
-void Arbol::insertar_nodo_p(int n){
-	insertar_nodo(raiz,n);
+void Arbol::insertar_nodo_p(int n, int info){
+	insertar_nodo(raiz,n,info);
 }
 //funcion para crear un nuevo nodo
-Nodo *Arbol::crear_nodo(int n){
+Nodo *Arbol::crear_nodo(int n, int info){
 	Nodo *nuevo_nodo = new Nodo ();
 	nuevo_nodo->dato = n;
+	nuevo_nodo->info = info;
 	nuevo_nodo->der = NULL;
 	nuevo_nodo->izq = NULL;
 	
 	return nuevo_nodo;
 }
 //funcion para asignar valor a nodo
-void Arbol::insertar_nodo(Nodo *&arbol, int n){
+void Arbol::insertar_nodo(Nodo *&arbol, int n, int info){
 	if(arbol == NULL){ //sie el arbol esta vacio
-		Nodo *nuevo_nodo = crear_nodo(n);
+		Nodo *nuevo_nodo = crear_nodo(n,info);
 		arbol = nuevo_nodo;
 		cout<<"\nElemento "<<n<<" insertado correctamente."<<endl;
 	}else{//si el arbol tiene un nodo o mas de un nodo
 		int valRaiz = arbol->dato; //obtenemos el valor de la raiz
 		if(n<valRaiz){//si el elemento es menor a la raiz lo insertamos a la izquierda
-			insertar_nodo(arbol->izq,n);
+			insertar_nodo(arbol->izq,n,info);
 		}else if(n>valRaiz){//si el elemento es mayor de la raiz lo insertamos a la derecha
-			insertar_nodo(arbol->der,n);
+			insertar_nodo(arbol->der,n,info);
 		}else{//en caso de que el valor ya exista
 			cout<<"Nodo ya existente"<<endl;
 		}
