@@ -22,6 +22,7 @@ class Arbol
 		void insertar_nodo(Nodo *&, int , Nodo *);
 		void mostrar_arbol(Nodo *, int);
 		bool buscar_nodo(Nodo *, int);
+		Nodo *buscar_padre(Nodo *, int);
 		void pre_orden(Nodo *);
 		void in_orden(Nodo *);
 		void post_orden(Nodo *);
@@ -90,6 +91,22 @@ bool Arbol::buscar_nodo(Nodo *arbol, int n){
 	}
 	else{//si el elemento que estamos buscando es mayor al elemento del arbol en el que vamos
 		return buscar_nodo(arbol->der,n);
+	}
+}
+
+Nodo *Arbol::buscar_padre(Nodo *padre, int n){
+	if(padre == NULL){ //sie el arbol esta vacio
+		return NULL;
+	}
+	else if(padre->dato == n){ //si el nodo es igual al elemento 
+		return NULL;
+	}else if(padre->der->dato == n  ||  padre->izq->dato == n){
+		return padre;
+	}else if(n < padre->dato){ //si el elemento que estamos buscando es menor al elemento del arbol en el que vamos
+		return buscar_padre(padre->izq,n);
+	}
+	else{//si el elemento que estamos buscando es mayor al elemento del arbol en el que vamos
+		return buscar_padre(padre->der,n);
 	}
 }
 
