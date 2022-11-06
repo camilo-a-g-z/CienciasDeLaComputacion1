@@ -22,6 +22,24 @@ int main(){
 	a.mostrar_arbol_p();
 	a.eliminar_p(51);
 	a.mostrar_arbol_p();
+	cout<<endl;
+	
+	/*
+	 *Como el arbol es privado en la clase no se puede realizar:
+	 *Nodo *n = a.buscar_nodo_p(3);
+	 *cout<<"Buscando un nodo: "<<n->info<<endl;
+	 *debido a que tenemos un priblema de acceso a memoria negado
+	*/
+	Nodo *n = a.buscar_nodo_p(15);
+	int i = n->dato;
+	cout<<"Buscando un nodo: "<<i<<endl;
+	/*
+	 * Nota: se pudo crear una copia desde la clase y enviarla, no obstante, resulta mas
+	 *mas util enviar la direccion ya que igualmente se puede acceder a otras posiciones
+	 *de memoria, por ejemplo:
+	*/
+	i = n->der->dato;
+	cout<<"Buscando un nodo: "<<i<<endl;
 	return 0;
 }
 

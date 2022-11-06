@@ -15,11 +15,9 @@ class Arbol
 {
 	private:
 		Nodo *raiz;
-		Nodo *padre_act;
 		Nodo *crear_nodo(int, int);
 		void insertar_nodo(Nodo *&, int, int);
 		void mostrar_arbol(Nodo *, int);
-		bool buscar_nodo(Nodo *, int);
 		Nodo *buscar_padre(Nodo *, int);
 		void pre_orden(Nodo *);
 		void in_orden(Nodo *);
@@ -29,13 +27,20 @@ class Arbol
 		Nodo *minimo(Nodo *);
 		void reemplazar(Nodo *, Nodo *);
 		void destruir(Nodo *);
+		Nodo *buscar_nodo(Nodo *, int);
 	public: 
 		Arbol(){
 		}
+		Nodo *buscar_nodo_p(int);
 		void insertar_nodo_p(int, int);
 		void mostrar_arbol_p();
 		void eliminar_p(int);
 };
+//Metodo para eliminar publico, se creo este metodo para simplificar acceso
+//desde fuerda de la clase y lograr hacer un metodo recursivo
+Nodo *Arbol::buscar_nodo_p(int n){
+	return buscar_nodo(raiz,n);
+}
 //Metodo para eliminar publico, se creo este metodo para simplificar acceso
 //desde fuerda de la clase y lograr hacer un metodo recursivo
 void Arbol::eliminar_p(int n){
@@ -89,11 +94,11 @@ void Arbol::mostrar_arbol(Nodo *arbol, int cont){
 	}
 }
 //funcion para buscar elemento en el arbol
-bool Arbol::buscar_nodo(Nodo *arbol, int n){
+Nodo *Arbol::buscar_nodo(Nodo *arbol, int n){
 	//si el arbol esta vacio
-	if(arbol == NULL){return false;}
+	if(arbol == NULL){return NULL;}
 	//si el nodo es igual al elemento 
-	else if(arbol->dato == n){return true;}
+	else if(arbol->dato == n){return arbol;}
 	//si el elemento que estamos buscando es menor al elemento del arbol en el que vamos
 	else if(n < arbol->dato){return buscar_nodo(arbol->izq,n);}
 	//si el elemento que estamos buscando es mayor al elemento del arbol en el que vamos
