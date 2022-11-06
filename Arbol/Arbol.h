@@ -14,10 +14,6 @@ class Arbol
 	private:
 		Nodo *raiz;
 		Nodo *padre_act;
-		
-	public: 
-		Arbol(){
-		}
 		Nodo *crear_nodo(int);
 		void insertar_nodo(Nodo *&, int);
 		void mostrar_arbol(Nodo *, int);
@@ -31,9 +27,12 @@ class Arbol
 		Nodo *minimo(Nodo *);
 		void reemplazar(Nodo *, Nodo *);
 		void destruir(Nodo *);
+	public: 
+		Arbol(){
+		}
 		void insertar_nodo_p(int);
 		void mostrar_arbol_p();
-		void eliminar_p(int n);
+		void eliminar_p(int);
 };
 void Arbol::eliminar_p(int n){
 	eliminar(raiz,n);
@@ -67,8 +66,10 @@ void Arbol::insertar_nodo(Nodo *&arbol, int n){
 		int valRaiz = arbol->dato; //obtenemos el valor de la raiz
 		if(n<valRaiz){//si el elemento es menor a la raiz lo insertamos a la izquierda
 			insertar_nodo(arbol->izq,n);
-		}else{//si el elemento es mayor de la raiz lo insertamos a la derecha
+		}else if(n>valRaiz){//si el elemento es mayor de la raiz lo insertamos a la derecha
 			insertar_nodo(arbol->der,n);
+		}else{
+			cout<<"Nodo ya existente"<<endl;
 		}
 	}
 }

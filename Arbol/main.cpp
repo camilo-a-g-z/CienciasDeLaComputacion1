@@ -15,8 +15,11 @@ int main(){
 	a.insertar_nodo_p(55);
 	a.insertar_nodo_p(49);
 	a.insertar_nodo_p(50);
+	a.insertar_nodo_p(50);
 	a.mostrar_arbol_p();
-	a.eliminar_p(15);
+	a.eliminar_p(57);
+	a.mostrar_arbol_p();
+	a.eliminar_p(51);
 	a.mostrar_arbol_p();
 	return 0;
 }
