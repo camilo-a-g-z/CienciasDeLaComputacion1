@@ -139,27 +139,29 @@ void Arbol::pre_orden(Nodo *arbol){
 }
 //funcion para recorrer el arbol en profundidad en InOrden : izquierda-raiz-derecha
 Queue<int> Arbol::in_orden(){
-	Pila<Nodo*> pila(100);
+	Pila<int> pila;
 	Queue<int> cola;
 	
 	Nodo *aux = raiz;
 	
-	pila.meter(aux);
+	pila.meter(aux->dato);
 	while(aux->izq!=NULL){
 		aux = aux->izq;
-		pila.meter(aux);
+		pila.meter(aux->dato);
+		cout<<aux->dato;
 	}
-	cola.enQueue(pila.sacar()->dato,'I'); 
+	cola.enQueue(pila.sacar(),'I'); 
+	cola.imprimir_queue('I');
 	while(!pila.vacia()){	
 		if(aux->der!=NULL){
 			if(aux->der->izq == NULL){
-				cola.enQueue(pila.sacar()->dato, 'I');
+				cola.enQueue(pila.sacar(), 'I');
 			} else {
 				aux = aux->der;
-				pila.meter(aux);
+				pila.meter(aux->dato);
 				while(aux->izq!=NULL){
 					aux = aux->izq;
-					pila.meter(aux);
+					pila.meter(aux->dato);
 				}
 			}
 		}
