@@ -139,10 +139,10 @@ void Arbol::pre_orden(Nodo *arbol){
 }
 //funcion para recorrer el arbol en profundidad en InOrden : izquierda-raiz-derecha
 Queue<int> Arbol::in_orden(){
-	Pila<Nodo> pila(5);
+	Pila<Nodo *> pila(5);
 	Queue<int> cola;
 	
-	/*Nodo *aux = raiz;
+	Nodo *aux = raiz;
 	
 	pila.meter(*&aux);
 	while(aux->izq!=NULL){
@@ -166,7 +166,7 @@ Queue<int> Arbol::in_orden(){
 			}
 		}
 	}											
-				*/									
+												
 	return cola;
 }
 //funcion para recorrer el arbol en profundidad en PostOrden : izquierda -derecha - raiz
