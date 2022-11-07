@@ -2,11 +2,11 @@
 #define PILAEDD2_H
 template < class T > 
 class Pila
-{ int *pila;
+{ T *pila;
   int p;
 	public:
-  		Pila ()
-   			{int max=100;pila = new T[max]; p=0;}
+  		Pila (int f)
+   			{pila = new T[100]; p=0;}
 		~Pila()
    			{delete pila;}
 		inline void meter (T v)
