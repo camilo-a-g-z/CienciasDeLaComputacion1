@@ -1,4 +1,6 @@
 #include <iostream>
+#include "PILA.h"
+#include "queue.h"
 #ifndef ARBOL_H
 #define ARBOL_H
 using namespace std;
@@ -19,9 +21,7 @@ class Arbol
 		void insertar_nodo(Nodo *&, int, int);
 		void mostrar_arbol(Nodo *, int);
 		Nodo *buscar_padre(Nodo *, int);
-		void pre_orden(Nodo *);
-		void in_orden(Nodo *);
-		void post_orden(Nodo *);
+		
 		void eliminar(Nodo *, int);
 		void eliminar_nodo(Nodo *);
 		Nodo *minimo(Nodo *);
@@ -37,6 +37,9 @@ class Arbol
 		void mostrar_arbol_p();
 		void eliminar_p(int);
 		bool arbol_vacio();
+		void pre_orden(Nodo *);
+		Queue<int> in_orden();
+		void post_orden(Nodo *);
 };
 //funcion para saber si el arbol esta vacio
 bool Arbol::arbol_vacio(){return raiz == NULL ? true : false;}
@@ -135,15 +138,34 @@ void Arbol::pre_orden(Nodo *arbol){
 	}
 }
 //funcion para recorrer el arbol en profundidad en InOrden : izquierda-raiz-derecha
-void Arbol::in_orden(Nodo *arbol){
-	if(arbol==NULL){
-		return;
+Queue<int> Arbol::in_orden(){
+	Pila<Nodo*> pila(100);
+	Queue<int> cola;
+	
+	Nodo *aux = raiz;
+	
+	pila.meter(aux);
+	while(aux->izq!=NULL){
+		aux = aux->izq;
+		pila.meter(aux);
 	}
-	else{
-		in_orden(arbol->izq);
-		cout<<arbol->dato<<" - ";
-		in_orden(arbol->der);
-	}
+	cola.enQueue(pila.sacar()->dato,'I'); 
+	while(!pila.vacia()){	
+		if(aux->der!=NULL){
+			if(aux->der->izq == NULL){
+				cola.enQueue(pila.sacar()->dato, 'I');
+			} else {
+				aux = aux->der;
+				pila.meter(aux);
+				while(aux->izq!=NULL){
+					aux = aux->izq;
+					pila.meter(aux);
+				}
+			}
+		}
+	}											
+													
+	return cola;
 }
 //funcion para recorrer el arbol en profundidad en PostOrden : izquierda -derecha - raiz
 void Arbol::post_orden(Nodo *arbol){

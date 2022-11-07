@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 	acc.meter(14);
 	acc.meter(22);
 	acc.meter(5);
-	reemplazar(acc, 5, 10);
+	//reemplazar(acc, 5, 10);
 	cout<<"Se remplaza el 5 por el 10:"<<endl;
 	while(!acc.vacia()){
 		cout<<acc.sacar()<<endl;
