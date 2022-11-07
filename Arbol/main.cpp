@@ -26,7 +26,11 @@ int main(){
 	
 	a.mostrar_arbol_p();
 	cout<<endl;
-	a.mostrar_arbol_p();
+	c = a.in_orden();
+	cout<<endl;
+	c.imprimir_queue('I');
+	cout<<endl;
+	a.eliminar_p(15);
 	a.mostrar_arbol_p();
 	cout<<endl;
 	c = a.in_orden();
