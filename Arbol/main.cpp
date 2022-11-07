@@ -17,18 +17,22 @@ int main(){
 	a.insertar_nodo_p(55,1);
 	a.insertar_nodo_p(49,1);
 	a.insertar_nodo_p(50,1);
-	a.insertar_nodo_p(50,1);
+	a.insertar_nodo_p(58,1);
+	a.insertar_nodo_p(39,1);
+	a.insertar_nodo_p(10,1);
+	a.insertar_nodo_p(60,1);
+	
+
+	
 	a.mostrar_arbol_p();
-	a.eliminar_p(57);
 	cout<<endl;
 	a.mostrar_arbol_p();
-	a.eliminar_p(51);
 	a.mostrar_arbol_p();
 	cout<<endl;
 	c = a.in_orden();
 	cout<<endl;
 	c.imprimir_queue('I');
-	cout<<"sacar";
+
 	/*
 	 *Como el arbol es privado en la clase no se puede realizar:
 	 *Nodo *n = a.buscar_nodo_p(3);

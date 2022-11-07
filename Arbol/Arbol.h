@@ -139,39 +139,71 @@ void Arbol::pre_orden(Nodo *arbol){
 }
 //funcion para recorrer el arbol en profundidad en InOrden : izquierda-raiz-derecha
 Queue<int> Arbol::in_orden(){
-	Pila<Nodo *> pila(5);
+	//Pila de Nodos
+	Pila<Nodo*> pila(1);
+	//Cola de enteros que es la que se va a retornar
 	Queue<int> cola;
+	//Auxiliar que apunta a la raiz	
+	Nodo *aux = raiz;	
+	pila.meter(aux);
 	
-	Nodo *aux = raiz;
-	
-	pila.meter(*&aux);
+	//Recorre todo a la izquierda desde la raiz, agregando los nodos que recorre
 	while(aux->izq!=NULL){
 		aux = aux->izq;
-		pila.meter(aux);
-		cout<<aux->dato;
+		pila.meter(aux); // se agrega a la pila el nodo
 	}
-	cola.enQueue((pila.sacar())->dato,'I'); 
-	cola.imprimir_queue('I');
-	while(!pila.vacia()){	
-		if(aux->der!=NULL){
-			if(aux->der->izq == NULL){
-				cola.enQueue(pila.sacar(), 'I');
-				cola.imprimir_queue('I');
+	//Se agrega a la cola el ultimo elemento encontrado
+	cola.enQueue(pila.sacar()->dato,'I'); 
+
+	//devuelve las iteraciones a la izquierda hasta llegar a la raiz, encolando en cola los nodos hijos que encuentre
+	while(!pila.vacia()){
+		//caso para cuando a la derecha hay nodo		
+		if(aux->der!=NULL){	
+			//si no tiene nodo a la izquierda lo agrega y deja en el aux el nodo a la derecha			
+			if(aux->der->izq == NULL){			
+				aux = aux->der;
+				pila.meter(aux);			
+				cola.enQueue(pila.sacar()->dato, 'I');	// Agrega a la cola	
+			//si a la izquierda tiene un nodo itera hasta que en la pila esten todos los descendientes								
 			} else {
 				aux = aux->der;
-				pila.meter(aux);
-				while(aux->izq!=NULL){
+				pila.meter(aux); //inserta el nodo de la derecha
+				while(aux->izq!=NULL){ //Guarda en la pila todos los nodos a la izq
 					aux = aux->izq;
 					pila.meter(aux);
 				}
 			}
-		}else{
-			aux = buscar_padre(raiz,pila.sacar())->izq;
-			cout<<"dato"<<aux->dato;
-			pila.meter(aux->dato) ;
+		}else{ //lo coloca en la cola y aux se iguala al padre
+			aux = pila.sacar();
+			cola.enQueue(aux->dato,'I');														
 		}
-	}											
-												
+	}	
+	//Elementos a la derecha de la raiz
+	if(aux->der){
+		pila.meter(aux->der);
+		aux=aux->der; //empieza desde el primer elemento que haya a la derecha
+	}
+	while(!pila.vacia()){ //itera hasta que ya no haya ningun nodo
+		if(aux->izq!=NULL){ //agrega el nodo a la izq
+			aux = aux->izq;
+			pila.meter(aux);
+		} else if(aux->der!=NULL){ //agrega nodo a la derecha
+			cola.enQueue(pila.sacar()->dato,'I'); //encola el padre		
+			aux = aux->der;
+			pila.meter(aux); //enpila el nodo de la derecha
+		} else { 
+			cola.enQueue(pila.sacar()->dato, 'I');
+		
+			if(!pila.vacia()){ //Cuando llega al ultimo nodo
+				aux = pila.sacar();
+				cola.enQueue(aux->dato, 'I');
+			}			
+			if(aux->der!=NULL){ 		
+				aux = aux->der;
+				pila.meter(aux);
+			}				
+		}		
+	}																							
 	return cola;
 }
 //funcion para recorrer el arbol en profundidad en PostOrden : izquierda -derecha - raiz
