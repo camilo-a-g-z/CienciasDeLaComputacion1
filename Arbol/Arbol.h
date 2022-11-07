@@ -156,6 +156,7 @@ Queue<int> Arbol::in_orden(){
 		if(aux->der!=NULL){
 			if(aux->der->izq == NULL){
 				cola.enQueue(pila.sacar(), 'I');
+				cola.imprimir_queue('I');
 			} else {
 				aux = aux->der;
 				pila.meter(aux->dato);
@@ -164,6 +165,10 @@ Queue<int> Arbol::in_orden(){
 					pila.meter(aux->dato);
 				}
 			}
+		}else{
+			aux = buscar_padre(raiz,pila.sacar())->izq;
+			cout<<"dato"<<aux->dato;
+			pila.meter(aux->dato) ;
 		}
 	}											
 													
