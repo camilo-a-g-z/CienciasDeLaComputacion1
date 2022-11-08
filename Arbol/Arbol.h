@@ -19,6 +19,7 @@ class Arbol
 		Nodo *raiz;
 		//colaIn de enteros que es la que se va a retornar
 		Queue<int> colaIn;
+		Queue<int> colaPs;
 		Nodo *crear_nodo(int, int);
 		void insertar_nodo(Nodo *&, int, int);
 		void mostrar_arbol(Nodo *, int);
@@ -41,7 +42,7 @@ class Arbol
 		bool arbol_vacio();
 		void pre_orden(Nodo *);
 		Queue<int> in_orden();
-		void post_orden(Nodo *);
+		Queue<int> post_orden();
 };
 //funcion para saber si el arbol esta vacio
 bool Arbol::arbol_vacio(){return raiz == NULL ? true : false;}
@@ -210,14 +211,23 @@ Queue<int> Arbol::in_orden(){
 	return colaIn;
 }
 //funcion para recorrer el arbol en profundidad en PostOrden : izquierda -derecha - raiz
-void Arbol::post_orden(Nodo *arbol){
-	if(arbol == NULL){
-		return;
+Queue<int> Arbol::post_orden(){
+	while(!colaPs.QueueVacia())
+	colaPs.deQueue('I');
+	//Pila de Nodos
+	Pila<Nodo*> pila(1);
+	//Auxiliar que apunta a la raiz	
+	Nodo *aux = raiz;	
+	pila.meter(aux);
+	
+	//Recorre todo a la izquierda desde la raiz, agregando los nodos que recorre
+	while(aux->izq!=NULL){
+		aux = aux->izq;
+		pila.meter(aux); // se agrega a la pila el nodo
 	}
-	else{
-		post_orden(arbol->izq);
-		post_orden(arbol->der);
-		cout<<arbol->dato<<" - ";
+	
+	while(!pila.vacia()){
+		
 	}
 }
 //funcion para eliminar nodo encontrado

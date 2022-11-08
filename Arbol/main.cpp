@@ -36,6 +36,8 @@ int main(){
 	c = a.in_orden();
 	cout<<endl;
 	c.imprimir_queue('I');
+	
+
 
 	/*
 	 *Como el arbol es privado en la clase no se puede realizar:
