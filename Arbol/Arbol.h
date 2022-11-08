@@ -280,7 +280,6 @@ Queue<int> Arbol::in_orden(){
 }
 //funcion para recorrer el arbol en profundidad en PostOrden : izquierda -derecha - raiz
 Queue<int> Arbol::post_orden(){
-<<<<<<< HEAD
 	while(!colaPos.QueueVacia())
 		colaPos.deQueue('I');
 	//Pila de Nodos
@@ -305,28 +304,6 @@ Queue<int> Arbol::post_orden(){
 			}
 		}
 	}
-	/*while(!colaPos.QueueVacia()){
-		cout<<colaPos.deQueue('I')<<" | ";
-=======
-	while(!colaPs.QueueVacia())
-	colaPs.deQueue('I');
-	//Pila de Nodos
-	Pila<Nodo*> pila(1);
-	//Auxiliar que apunta a la raiz	
-	Nodo *aux = raiz;	
-	pila.meter(aux);
-	
-	//Recorre todo a la izquierda desde la raiz, agregando los nodos que recorre
-	while(aux->izq!=NULL){
-		aux = aux->izq;
-		pila.meter(aux); // se agrega a la pila el nodo
-	}
-	
-	while(!pila.vacia()){
-		
->>>>>>> 165499746b8305bb3fed208573f8854d888e5c6d
-	}
-	cout<<endl;*/
 	return colaPos;
 }
 //funcion para eliminar nodo encontrado

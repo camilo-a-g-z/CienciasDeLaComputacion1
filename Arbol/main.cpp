@@ -43,10 +43,13 @@ int main(){
 	cout<<endl;
 	c = a.in_orden();
 	c2 = a.pre_orden();
+	c3 = a.post_orden();
 	cout<<endl;
 	c.imprimir_queue('I');
 	cout<<endl;
 	c2.imprimir_queue('I');
+	cout<<endl;
+	c3.imprimir_queue('I');
 
 	/*
 	 *Como el arbol es privado en la clase no se puede realizar:
