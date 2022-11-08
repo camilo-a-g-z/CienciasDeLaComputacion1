@@ -289,23 +289,28 @@ Queue<int> Arbol::post_orden(){
 	while(!colaPos.QueueVacia())
 		colaPos.deQueue('I');
 	//Pila de Nodos
-	Pila<Nodo*> pila(1);//s
+	Pila<Nodo*> pila(1);
 	//Auxiliar que apunta a la raiz	
-	Nodo *aux = raiz; //nodo
-	Nodo *aux2 = NULL; //lastnode
-	Nodo *aux3 = NULL;//peeknode
-	
+	Nodo *aux = raiz; 
+	Nodo *aux2 = NULL;
+	Nodo *aux3 = NULL;
+	//iteramos hasta vaciar la pila y terminar recorrido
 	while(!pila.vacia() || aux != NULL){
 		if(aux != NULL){
+			//hacemos recorrido a la izq
 			pila.meter(aux);
 			aux = aux->izq;
 		}else{
+			//revisamos elemento actual de pila
 			aux3 = pila.sacar();
 			pila.meter(aux3);
 			if(aux3->der != NULL && aux2 != aux3->der){
+				//hacemos recorrido a la derecha
 				aux = aux3->der;
 			}else{
+				//metemos en cola cuando ya se recorrio 
 				colaPos.enQueue(aux3->dato,'I');
+				//se saca de la pila
 				aux2 = pila.sacar();
 			}
 		}
