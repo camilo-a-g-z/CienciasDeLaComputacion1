@@ -20,6 +20,7 @@ class Arbol
 		//colaIn de enteros que es la que se va a retornar
 		Queue<int> colaIn;
 		Queue<int> colaPre;
+		Queue<int> colaPos;
 		Nodo *crear_nodo(int, int);
 		void insertar_nodo(Nodo *&, int, int);
 		void mostrar_arbol(Nodo *, int);
@@ -42,7 +43,7 @@ class Arbol
 		bool arbol_vacio();
 		Queue<int> pre_orden();
 		Queue<int> in_orden();
-		void post_orden(Nodo *);
+		Queue<int> post_orden();
 };
 //funcion para saber si el arbol esta vacio
 bool Arbol::arbol_vacio(){return raiz == NULL ? true : false;}
@@ -146,7 +147,6 @@ Queue<int> Arbol::pre_orden(){
 		colaPre.enQueue(aux->dato, 'I');
 	}
 	//Se agrega a la colaPre el ultimo elemento encontrado
-	//colaPre.enQueue(pila.sacar()->dato,'I'); 
 
 	//devuelve las iteraciones a la izquierda hasta llegar a la raiz, encolaPrendo en colaPre los nodos hijos que encuentre
 	while(!pila.vacia()){
@@ -278,15 +278,36 @@ Queue<int> Arbol::in_orden(){
 	return colaIn;
 }
 //funcion para recorrer el arbol en profundidad en PostOrden : izquierda -derecha - raiz
-void Arbol::post_orden(Nodo *arbol){
-	if(arbol == NULL){
-		return;
+Queue<int> Arbol::post_orden(){
+	while(!colaPos.QueueVacia())
+		colaPos.deQueue('I');
+	//Pila de Nodos
+	Pila<Nodo*> pila(1);//s
+	//Auxiliar que apunta a la raiz	
+	Nodo *aux = raiz; //nodo
+	Nodo *aux2 = NULL; //lastnode
+	Nodo *aux3 = NULL;//peeknode
+	
+	while(!pila.vacia() || aux != NULL){
+		if(aux != NULL){
+			pila.meter(aux);
+			aux = aux->izq;
+		}else{
+			aux3 = pila.sacar();
+			pila.meter(aux3);
+			if(aux3->der != NULL && aux2 != aux3->der){
+				aux = aux3->der;
+			}else{
+				colaPos.enQueue(aux3->dato,'I');
+				aux2 = pila.sacar();
+			}
+		}
 	}
-	else{
-		post_orden(arbol->izq);
-		post_orden(arbol->der);
-		cout<<arbol->dato<<" - ";
+	/*while(!colaPos.QueueVacia()){
+		cout<<colaPos.deQueue('I')<<" | ";
 	}
+	cout<<endl;*/
+	return colaPos;
 }
 //funcion para eliminar nodo encontrado
 void Arbol::eliminar_nodo(Nodo *nodo_eliminar){

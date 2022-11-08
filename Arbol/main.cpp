@@ -9,6 +9,7 @@ int main(){
 	Arbol a;
 	Queue<int> c;
 	Queue<int> c2;
+	Queue<int> c3;
 	cout<<"Arbol esta vacio? "<<a.arbol_vacio()<<endl;
 	a.insertar_nodo_p(15,1);
 	a.insertar_nodo_p(51,1);
@@ -29,17 +30,23 @@ int main(){
 	cout<<endl;
 	c = a.in_orden();
 	c2 = a.pre_orden();
+	c3 = a.post_orden();
 	cout<<endl;
 	c.imprimir_queue('I');
 	cout<<endl;
 	c2.imprimir_queue('I');
 	cout<<endl;
+	c3.imprimir_queue('I');
+	cout<<endl;
 	a.eliminar_p(15);
 	a.mostrar_arbol_p();
 	cout<<endl;
 	c = a.in_orden();
+	c2 = a.pre_orden();
 	cout<<endl;
 	c.imprimir_queue('I');
+	cout<<endl;
+	c2.imprimir_queue('I');
 
 	/*
 	 *Como el arbol es privado en la clase no se puede realizar:
