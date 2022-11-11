@@ -2,7 +2,7 @@
 #define PILAEDD2_H
 template < class T > 
 class Pila
-{ int *pila;
+{ T *pila;
   int p;
 	public:
   		Pila (int max=100)

@@ -142,7 +142,7 @@ Queue<int> Arbol::pre_orden(){
 	while(!colaPre.QueueVacia())
 		colaPre.deQueue('I');
 	//Pila de Nodos
-	Pila<Nodo*> pila(1);
+	Pila<Nodo*> pila(100);
 	//Auxiliar que apunta a la raiz	
 	Nodo *aux = raiz;
 	if(aux == NULL){return colaPre;}
@@ -165,7 +165,7 @@ Queue<int> Arbol::in_orden(){
 	while(!colaIn.QueueVacia())
 		colaIn.deQueue('I');
 	//Pila de Nodos
-	Pila<Nodo*> pila(1); //s
+	Pila<Nodo*> pila(100); //s
 	//Auxiliar que apunta a la raiz	
 	Nodo *aux = raiz; //nodo	
 	while(!pila.vacia() || aux != NULL){
@@ -185,7 +185,7 @@ Queue<int> Arbol::post_orden(){
 	while(!colaPos.QueueVacia())
 		colaPos.deQueue('I');
 	//Pila de Nodos
-	Pila<Nodo*> pila(1);
+	Pila<Nodo*> pila(100);
 	//Auxiliar que apunta a la raiz	
 	Nodo *aux = raiz; 
 	Nodo *aux2 = NULL;
