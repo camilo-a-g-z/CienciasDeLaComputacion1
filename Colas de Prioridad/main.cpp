@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-	Monticulo m(11);
+	Monticulo m(10);
 	m.insertar(60);
 	m.insertar(80);
 	m.insertar(20);
