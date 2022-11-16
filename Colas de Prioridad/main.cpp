@@ -15,5 +15,8 @@ int main(){
 	m.insertar(55);
 	m.insertar(45);
 	m.imprimirArreglo();
+	m.atender();
+	m.atender();
+	m.imprimirArreglo();
 	return 0;
 }
