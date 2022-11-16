@@ -1,3 +1,8 @@
+/*
+	Integrantes:
+	Camilo Andres Garcia Zambrano(20201020047)
+	Miguel Angel Veloza Ortiz(20192020012)
+*/
 #include <iostream>
 #include "Monticulo.h"
 using namespace std;
