@@ -44,7 +44,7 @@ int Monticulo::atender(){
 	aux = Arr[Arr[0]-1]; //guarda el ultimo elemento del arreglo
 	Arr[Arr[0]-1] = 0;
 	aux2 = Arr[1]; //Guarda el elemento de la raiz
-	Arr[0] = Arr[0]-1; //disminuye en 1 el tamaño del arreglo
+	Arr[0] = Arr[0]-1; //disminuye en 1 el tamaï¿½o del arreglo
 	organizar2(aux, 1);	
 
 	
@@ -54,15 +54,17 @@ int Monticulo::atender(){
 
 void Monticulo::organizar2(int pend, int pos){
 	int hijo = 2*pos; //busca al hijo de la pos
-	if(hijo<Arr[0]){
+	cout<<pend;
+	if(pos<Arr[0]){
 		if (Arr[hijo]>pend && Arr[hijo]>Arr[hijo+1]){ //caso en el que el de la poscision hijo es mayor
 			Arr[pos] = Arr[hijo];
 			organizar2(pend, hijo); 
 		} else if (Arr[hijo+1]>pend && Arr[hijo+1]>Arr[hijo]){ //caso en el que el de la poscision hijo+1 es mayor
 			Arr[pos] = Arr[hijo+1];
 			organizar2(pend, hijo+1);
-		} else { //cuando el elemento pendiente es el mayor
+		} else{ //cuando el elemento pendiente es el mayor
 			Arr[pos] = pend;
+			
 		}
 	}
 	
