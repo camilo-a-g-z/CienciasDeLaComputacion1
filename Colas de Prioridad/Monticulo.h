@@ -59,8 +59,9 @@ int Monticulo::atender(){
 
 void Monticulo::organizar2(int pend, int pos){
 	int hijo = 2*pos; //busca al hijo de la pos
-	cout<<pend;
-	if(pos<Arr[0]){
+	//cout<<pend<<endl;
+	Arr[pos] = pend;
+	if(pos<Arr[0] && hijo<tam+1){
 		if (Arr[hijo]>pend && Arr[hijo]>Arr[hijo+1]){ //caso en el que el de la poscision hijo es mayor
 			Arr[pos] = Arr[hijo];
 			organizar2(pend, hijo); 
@@ -69,7 +70,6 @@ void Monticulo::organizar2(int pend, int pos){
 			organizar2(pend, hijo+1);
 		} else{ //cuando el elemento pendiente es el mayor
 			Arr[pos] = pend;
-			
 		}
 	}
 	
