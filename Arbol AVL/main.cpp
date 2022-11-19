@@ -7,12 +7,12 @@
 #include <iostream>
 #include <stdlib.h>
 #include <conio.h>
-#include "Arbol.h"
+#include "ArbolAVL.h"
 #include "PILA.h"
 using namespace std;
 
 int main(){
-	Arbol a;
+	ArbolAVL a;
 	Queue<int> c;
 	Queue<int> c2;
 	Queue<int> c3;
