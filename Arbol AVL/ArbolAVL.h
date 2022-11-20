@@ -77,22 +77,45 @@ void ArbolAVL::mostrar_arbol_p(){
 //desde fuerda de la clase y lograr hacer un metodo recursivo
 void ArbolAVL::insertar_nodo_p(int n, int info){
 	Nodo *n_i = insertar_nodo(raiz,n,info);
+	Nodo *pad = buscar_padre(raiz,n_i->dato);	
+	//Nodo *a = ajustarFB(n_i,'I');
 }
 
 Nodo *ArbolAVL::ajustarFB(Nodo *d, char tipo){
 	if(tipo == 'I'){
-		Nodo *pad = buscar_padre(raiz, d->dato);
-		//en el case de que el elemento insertado tenga un hermano esto en ningun caso desbalancea el arbol
-		if(pad->der == d && pad->izq != NULL || pad->izq == d && pad->der != NULL){
-			return NULL;
-		}else{
-			if(pad->der == d){
-				pad->FB = pad->FB +1;
+		if(d != raiz){
+			cout<<"Here "<<d->dato<<endl;
+			Nodo *pad = buscar_padre(raiz, d->dato);
+						
+			//en el case de que el elemento insertado tenga un hermano esto en ningun caso desbalancea el arbol
+			if(pad->der == d && pad->izq != NULL || pad->izq == d && pad->der != NULL){
+				return NULL;
 			}else{
-				pad->FB = pad->FB -1;
+				Nodo *aux = d;
+				while(pad != raiz){
+					if(pad->der == aux){
+						pad->FB = pad->FB +1;
+					}else{
+						pad->FB = pad->FB -1;
+					}
+					if(pad->FB > 1 || pad->FB <-1){
+						return pad;
+					}
+					aux = pad;
+					pad = buscar_padre(raiz,pad->dato);
+				}
+				if(pad->der == aux){
+					pad->FB = pad->FB +1;
+				}else{
+					pad->FB = pad->FB -1;
+				}
+				if(pad->FB > 1 || pad->FB <-1){
+						return pad;
+					}
 			}
 		}
 	}
+	return NULL;
 }
 //funcion para crear un nuevo nodo
 Nodo *ArbolAVL::crear_nodo(int n, int info){
@@ -148,15 +171,19 @@ Nodo *ArbolAVL::buscar_nodo(Nodo *arbol, int n){
 
 Nodo *ArbolAVL::buscar_padre(Nodo *padre, int n){
 	//si el arbol esta vacio
-	if(padre == NULL){return NULL;}
+	if(padre == NULL || padre->dato == n){return NULL;}
+	if(padre->der != NULL){
+		if(padre->der->dato == n){return padre;}
+	}
+	if(padre->izq != NULL){
+		if(padre->izq->dato == n){return padre;}
+	}
 	//si el nodo es igual al elemento quiere decir que es la raiz
-	else if(padre->dato == n){return NULL;}
-	//si alguno de los hijos es el datos se encontro el padre
-	else if(padre->der->dato == n  ||  padre->izq->dato == n){return padre;}
+	if(padre->dato == n){return NULL;}
 	//si el elemento que estamos buscando es menor al elemento del arbol en el que vamos
 	else if(n < padre->dato){return buscar_padre(padre->izq,n);}
 	//si el elemento que estamos buscando es mayor al elemento del arbol en el que vamos
-	else{return buscar_padre(padre->der,n);}
+	else if(n > padre->dato){return buscar_padre(padre->der,n);}
 }
 
 //funcion para recorrer el arbol en profundidad preOrden: raiz-izquierda-derecha
@@ -285,10 +312,15 @@ void ArbolAVL::reemplazar(Nodo *arbol, Nodo *nuevo_nodo){
 	Nodo *padre = buscar_padre(raiz,arbol->dato);
 	if(padre != NULL){
 		//arbol->padre hay que asignarle su nuevo hijo
-		if(arbol->dato == padre->izq->dato){
-			padre->izq = nuevo_nodo;
-		}else if(arbol->dato == padre->der->dato){
-			padre->der = nuevo_nodo;	
+		if(padre->izq != NULL){
+			if(arbol->dato == padre->izq->dato){
+				padre->izq = nuevo_nodo;
+			}
+		}
+		if(arbol->der != NULL){
+			if(arbol->dato == padre->der->dato){
+				padre->der = nuevo_nodo;	
+			}
 		}
 	}
 }

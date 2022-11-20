@@ -17,16 +17,17 @@ int main(){
 	Queue<int> c2;
 	Queue<int> c3;
 	cout<<"Arbol esta vacio? "<<a.arbol_vacio()<<endl;
-	a.insertar_nodo_p(15,1);
-	a.insertar_nodo_p(51,1);
+	a.insertar_nodo_p(1,1);
+	a.insertar_nodo_p(2,1);
+	a.insertar_nodo_p(3,1);
+	a.insertar_nodo_p(4,1);
 	a.insertar_nodo_p(5,1);
 	a.insertar_nodo_p(6,1);
-	a.insertar_nodo_p(3,1);
-	a.insertar_nodo_p(55,1);
 	a.insertar_nodo_p(49,1);
 	a.insertar_nodo_p(50,1);
 	a.insertar_nodo_p(58,1);
 	a.insertar_nodo_p(39,1);
+	a.mostrar_arbol_p();
 	a.insertar_nodo_p(10,1);
 	a.insertar_nodo_p(60,1);
 	
@@ -44,7 +45,7 @@ int main(){
 	cout<<endl;
 	c3.imprimir_queue('I');
 	cout<<endl;
-	a.eliminar_p(15);
+	a.eliminar_p(5);
 	a.mostrar_arbol_p();
 	cout<<endl;
 	c = a.in_orden();
