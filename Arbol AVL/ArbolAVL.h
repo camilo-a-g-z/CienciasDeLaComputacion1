@@ -194,22 +194,23 @@ Nodo *ArbolAVL::ajustarFB(Nodo *d, char tipo){
 						pad->FB = pad->FB -1;
 					}
 					if(pad->FB > 1 || pad->FB <-1){
-						cout<<"paramos en: "<<pad->dato<<endl;
 						return pad;
 					}
-					/*if(pad->FB == 0){
+					if(pad->FB == 0){
 						break;
-					}*/
+					}
 					aux = pad;
 					pad = buscar_padre(raiz,pad->dato);
 				}
-				if(pad->der == aux){
-					pad->FB = pad->FB +1;
-				}else{
-					pad->FB = pad->FB -1;
-				}
-				if(pad->FB > 1 || pad->FB <-1){
-					return pad;
+				if(pad == raiz){
+					if(pad->der == aux){
+						pad->FB = pad->FB +1;
+					}else{
+						pad->FB = pad->FB -1;
+					}
+					if(pad->FB > 1 || pad->FB <-1){
+						return pad;
+					}
 				}
 			}
 		}
