@@ -17,10 +17,32 @@ int main(){
 	Queue<int> c2;
 	Queue<int> c3;
 	cout<<"Arbol esta vacio? "<<a.arbol_vacio()<<endl;
-	a.insertar_nodo_p(1,1);
-	a.insertar_nodo_p(2,1);
-	a.insertar_nodo_p(3,1);
-	a.insertar_nodo_p(4,1);
+	/*a.insertar_nodo_p(10,1);
+	a.insertar_nodo_p(8,1);
+	a.insertar_nodo_p(7,1);
+	a.insertar_nodo_p(6,1);
+	a.insertar_nodo_p(5,1);
+	a.insertar_nodo_p(9,1);*/
+	
+	a.insertar_nodo_p(90,1);
+	a.insertar_nodo_p(38,1);
+	a.insertar_nodo_p(40,1);
+	a.insertar_nodo_p(80,1);
+	a.insertar_nodo_p(73,1);
+	a.insertar_nodo_p(25,1);
+	a.insertar_nodo_p(30,1);
+	a.insertar_nodo_p(84,1);
+	a.insertar_nodo_p(100,1);
+	a.insertar_nodo_p(20,1);
+	a.insertar_nodo_p(88,1);
+	a.insertar_nodo_p(79,1);
+	a.insertar_nodo_p(85,1);
+	a.insertar_nodo_p(70,1);
+	a.insertar_nodo_p(89,1);
+	a.insertar_nodo_p(110,1);
+	a.insertar_nodo_p(87,1);
+	//a.mostrar_arbol_p();
+	/*a.insertar_nodo_p(4,1);
 	a.insertar_nodo_p(5,1);
 	a.insertar_nodo_p(6,1);
 	a.insertar_nodo_p(49,1);
@@ -55,7 +77,7 @@ int main(){
 	cout<<endl;
 	c2.imprimir_queue('I');
 	cout<<endl;
-	c3.imprimir_queue('I');
+	c3.imprimir_queue('I');*/
 
 	/*
 	 *Como el arbol es privado en la clase no se puede realizar:

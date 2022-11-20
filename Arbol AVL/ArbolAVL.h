@@ -42,6 +42,9 @@ class ArbolAVL
 		void destruir(Nodo *);
 		Nodo *buscar_nodo(Nodo *, int);
 		Nodo *ajustarFB(Nodo *, char);
+		void corregirFB(Nodo *);
+		Nodo *rotacionIZQ(Nodo *);
+		Nodo *rotacionDER(Nodo *);
 	public: 
 		ArbolAVL(){
 			raiz = NULL;
@@ -79,6 +82,99 @@ void ArbolAVL::insertar_nodo_p(int n, int info){
 	Nodo *n_i = insertar_nodo(raiz,n,info);	
 	Nodo *a = ajustarFB(n_i,'I');
 	mostrar_arbol_p();
+	if(a != NULL){
+		cout<<"Estoy corrigiendo: "<<a->dato<<endl;
+		corregirFB(a);
+	}
+	cout<<endl<<endl;
+	mostrar_arbol_p();
+}
+
+void ArbolAVL::corregirFB(Nodo *a){
+	if(a == raiz){
+		if(a->FB > 1){
+			if(a->der->FB >=0){
+				raiz = rotacionIZQ(a);
+				a->FB = raiz->FB = 0;
+			}else{
+				a->der = rotacionDER(a->der);
+				a->der->FB = 2;
+				if(a->der->der->izq){
+					a->der->der->FB = 0;
+				}else{
+					a->der->der->FB = 1;
+				}
+				corregirFB(a);
+			}			
+		}else{
+			if(a->izq->FB <=0){
+				raiz = rotacionDER(a);
+				a->FB = raiz->FB = 0;
+			}else{
+				a->izq = rotacionIZQ(a->izq);
+				a->izq->FB = -1;
+				a->izq->izq->FB = 0;
+				mostrar_arbol_p();
+				corregirFB(a);
+			}
+		}
+	}else{
+		Nodo *aux;
+		Nodo *pad = buscar_padre(raiz, a->dato);
+		if(a->FB > 1){
+			if(a->der->FB >=0){
+				aux = rotacionIZQ(a);
+				a->FB = aux->FB = 0;
+				if(pad->der && pad->der == a){
+					pad->der = aux;
+				}else{
+					pad->izq = aux;
+				}
+			}else{
+				a->der = rotacionDER(a->der);
+				a->der->FB = 2;
+				if(a->der->der->izq){
+					a->der->der->FB = 0;
+				}else{
+					a->der->der->FB = 1;
+				}
+				corregirFB(a);
+			}			
+		}else{
+			if(a->izq->FB <=0){
+				aux = rotacionDER(a);
+				cout<<"HERE: "<<aux->dato<<endl;
+				a->FB = aux->FB = 0;
+				if(pad->der && pad->der == a){
+					pad->der = aux;
+				}else{
+					pad->izq = aux;
+				}
+			}else{
+				a->izq = rotacionIZQ(a->izq);
+				a->izq->FB = -1;
+				a->izq->izq->FB = 0;
+				corregirFB(a);
+			}
+		}
+	}
+	
+}
+
+Nodo *ArbolAVL::rotacionIZQ(Nodo *a){
+	Nodo *hijo = a->der;
+	if(hijo->izq){a->der = hijo->izq;}
+	else{a->der = NULL;}
+	hijo->izq = a;
+	return hijo;
+}
+
+Nodo *ArbolAVL::rotacionDER(Nodo *a){
+	Nodo *hijo = a->izq;
+	if(hijo->der){a->izq = hijo->der;}
+	else{a->izq = NULL;}
+	hijo->der = a;
+	return hijo;
 }
 
 Nodo *ArbolAVL::ajustarFB(Nodo *d, char tipo){
@@ -87,6 +183,7 @@ Nodo *ArbolAVL::ajustarFB(Nodo *d, char tipo){
 			Nodo *pad = buscar_padre(raiz, d->dato);		
 			//en el case de que el elemento insertado tenga un hermano esto en ningun caso desbalancea el arbol
 			if(pad->der == d && pad->izq != NULL || pad->izq == d && pad->der != NULL){
+				pad->FB = 0;
 				return NULL;
 			}else{
 				Nodo *aux = d;
@@ -97,8 +194,12 @@ Nodo *ArbolAVL::ajustarFB(Nodo *d, char tipo){
 						pad->FB = pad->FB -1;
 					}
 					if(pad->FB > 1 || pad->FB <-1){
+						cout<<"paramos en: "<<pad->dato<<endl;
 						return pad;
 					}
+					/*if(pad->FB == 0){
+						break;
+					}*/
 					aux = pad;
 					pad = buscar_padre(raiz,pad->dato);
 				}
