@@ -27,7 +27,6 @@ int main(){
 	a.insertar_nodo_p(50,1);
 	a.insertar_nodo_p(58,1);
 	a.insertar_nodo_p(39,1);
-	a.mostrar_arbol_p();
 	a.insertar_nodo_p(10,1);
 	a.insertar_nodo_p(60,1);
 	

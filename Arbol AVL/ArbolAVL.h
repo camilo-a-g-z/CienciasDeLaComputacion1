@@ -76,17 +76,15 @@ void ArbolAVL::mostrar_arbol_p(){
 //Metodo para insertar publico, se creo este metodo para simplificar acceso
 //desde fuerda de la clase y lograr hacer un metodo recursivo
 void ArbolAVL::insertar_nodo_p(int n, int info){
-	Nodo *n_i = insertar_nodo(raiz,n,info);
-	Nodo *pad = buscar_padre(raiz,n_i->dato);	
-	//Nodo *a = ajustarFB(n_i,'I');
+	Nodo *n_i = insertar_nodo(raiz,n,info);	
+	Nodo *a = ajustarFB(n_i,'I');
+	mostrar_arbol_p();
 }
 
 Nodo *ArbolAVL::ajustarFB(Nodo *d, char tipo){
 	if(tipo == 'I'){
 		if(d != raiz){
-			cout<<"Here "<<d->dato<<endl;
-			Nodo *pad = buscar_padre(raiz, d->dato);
-						
+			Nodo *pad = buscar_padre(raiz, d->dato);		
 			//en el case de que el elemento insertado tenga un hermano esto en ningun caso desbalancea el arbol
 			if(pad->der == d && pad->izq != NULL || pad->izq == d && pad->der != NULL){
 				return NULL;
@@ -110,8 +108,8 @@ Nodo *ArbolAVL::ajustarFB(Nodo *d, char tipo){
 					pad->FB = pad->FB -1;
 				}
 				if(pad->FB > 1 || pad->FB <-1){
-						return pad;
-					}
+					return pad;
+				}
 			}
 		}
 	}
@@ -153,7 +151,7 @@ void ArbolAVL::mostrar_arbol(Nodo *arbol, int cont){
 	else{
 		mostrar_arbol(arbol->der,cont+1);
 		for(int i=0;i<cont;i++){cout<<"   ";}
-		cout<<arbol->dato<<endl;
+		cout<<arbol->dato<<"|"<<arbol->FB<<endl;
 		mostrar_arbol(arbol->izq,cont+1);
 	}
 }
