@@ -1,7 +1,6 @@
 /*
 	Integrantes:
 	Camilo Andres Garcia Zambrano(20201020047)
-	Miguel Angel Veloza Ortiz(20192020012)
 */
 
 #include <iostream>
@@ -69,17 +68,12 @@ Nodo *ArbolAVL::buscar_nodo_p(int n){
 //Metodo para eliminar publico, se creo este metodo para simplificar acceso
 //desde fuerda de la clase y lograr hacer un metodo recursivo
 void ArbolAVL::eliminar_p(int n){
-	mostrar_arbol_p();
 	Nodo *pad = eliminar(raiz,n);
 	Nodo *a = ajustarFB(pad,'E');
-	cout<<endl<<endl;
-	mostrar_arbol_p();
-	cout<<endl<<endl;
 	if(a != NULL){
 		cout<<"Estoy corrigiendo: "<<a->dato<<endl;
 		corregirFB(a);
 	}
-	mostrar_arbol_p();
 }
 //Metodo para mostrar arbol publico, se creo este metodo para simplificar acceso
 //desde fuerda de la clase y lograr hacer un metodo recursivo
@@ -102,7 +96,16 @@ void ArbolAVL::corregirFB(Nodo *a){
 		if(a->FB > 1){
 			if(a->der->FB >=0){
 				raiz = rotacionIZQ(a);
-				a->FB = raiz->FB = 0;
+				a->FB = 0;
+				raiz->FB = raiz->FB-1;
+				if(a->der != NULL && a->izq == NULL){
+					a->FB = 1;
+				}
+				/*a->FB = raiz->FB = 0;
+				if(a->der != NULL){
+					a->FB = 1;
+					raiz->FB = -1;
+				}*/
 			}else{
 				a->der = rotacionDER(a->der);
 				a->der->FB = 2;
@@ -116,7 +119,11 @@ void ArbolAVL::corregirFB(Nodo *a){
 		}else{
 			if(a->izq->FB <=0){
 				raiz = rotacionDER(a);
-				a->FB = raiz->FB = 0;
+				a->FB = 0;
+				raiz->FB = raiz->FB + 1;
+				if(a->izq != NULL & a->der == NULL ){
+					a->FB = 1;
+				}
 			}else{
 				a->izq = rotacionIZQ(a->izq);
 				a->izq->FB = -1;
@@ -132,8 +139,12 @@ void ArbolAVL::corregirFB(Nodo *a){
 			if(a->der->FB >=0){
 				aux = rotacionIZQ(a);
 				a->FB = aux->FB = 0;
-				if(a->izq){
+				if(a->izq != NULL){
 					a->FB = -1;
+				}
+				if(a->der != NULL){
+					a->FB = 1;
+					aux->FB = -1;
 				}
 				if(pad->der && pad->der == a){
 					pad->der = aux;
@@ -143,7 +154,6 @@ void ArbolAVL::corregirFB(Nodo *a){
 			}else{
 				a->der = rotacionDER(a->der);
 				a->der->FB = 2;
-				cout<<"Valor de a der: "<<a->der->dato<<endl;
 				if(a->der->der->izq){
 					a->der->der->FB = 0;
 				}else{
@@ -154,12 +164,15 @@ void ArbolAVL::corregirFB(Nodo *a){
 		}else{
 			if(a->izq->FB <=0){
 				aux = rotacionDER(a);
-				cout<<"HERE: "<<aux->dato<<endl;
 				a->FB = aux->FB = 0;
 				if(pad->der && pad->der == a){
 					pad->der = aux;
 				}else{
 					pad->izq = aux;
+				}
+				if(a->izq != NULL){
+					a->FB = -1;
+					aux->FB = 1;
 				}
 			}else{
 				a->izq = rotacionIZQ(a->izq);
