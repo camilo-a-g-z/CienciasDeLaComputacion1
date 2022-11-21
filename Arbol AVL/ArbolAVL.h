@@ -25,6 +25,7 @@ class ArbolAVL
 {
 	private:
 		Nodo *raiz;
+		Nodo *padre_temporal;
 		//colaIn de enteros que es la que se va a retornar
 		Queue<int> colaIn;
 		Queue<int> colaPs;
@@ -34,8 +35,7 @@ class ArbolAVL
 		Nodo *insertar_nodo(Nodo *&, int, int);
 		void mostrar_arbol(Nodo *, int);
 		Nodo *buscar_padre(Nodo *, int);
-		
-		void eliminar(Nodo *, int);
+		Nodo *eliminar(Nodo *, int);
 		void eliminar_nodo(Nodo *);
 		Nodo *minimo(Nodo *);
 		void reemplazar(Nodo *, Nodo *);
@@ -69,7 +69,17 @@ Nodo *ArbolAVL::buscar_nodo_p(int n){
 //Metodo para eliminar publico, se creo este metodo para simplificar acceso
 //desde fuerda de la clase y lograr hacer un metodo recursivo
 void ArbolAVL::eliminar_p(int n){
-	eliminar(raiz,n);
+	mostrar_arbol_p();
+	Nodo *pad = eliminar(raiz,n);
+	Nodo *a = ajustarFB(pad,'E');
+	cout<<endl<<endl;
+	mostrar_arbol_p();
+	cout<<endl<<endl;
+	if(a != NULL){
+		cout<<"Estoy corrigiendo: "<<a->dato<<endl;
+		corregirFB(a);
+	}
+	mostrar_arbol_p();
 }
 //Metodo para mostrar arbol publico, se creo este metodo para simplificar acceso
 //desde fuerda de la clase y lograr hacer un metodo recursivo
@@ -81,13 +91,10 @@ void ArbolAVL::mostrar_arbol_p(){
 void ArbolAVL::insertar_nodo_p(int n, int info){
 	Nodo *n_i = insertar_nodo(raiz,n,info);	
 	Nodo *a = ajustarFB(n_i,'I');
-	mostrar_arbol_p();
 	if(a != NULL){
 		cout<<"Estoy corrigiendo: "<<a->dato<<endl;
 		corregirFB(a);
 	}
-	cout<<endl<<endl;
-	mostrar_arbol_p();
 }
 
 void ArbolAVL::corregirFB(Nodo *a){
@@ -99,7 +106,7 @@ void ArbolAVL::corregirFB(Nodo *a){
 			}else{
 				a->der = rotacionDER(a->der);
 				a->der->FB = 2;
-				if(a->der->der->izq){
+				if(a->der->der->izq == NULL){
 					a->der->der->FB = 0;
 				}else{
 					a->der->der->FB = 1;
@@ -125,6 +132,9 @@ void ArbolAVL::corregirFB(Nodo *a){
 			if(a->der->FB >=0){
 				aux = rotacionIZQ(a);
 				a->FB = aux->FB = 0;
+				if(a->izq){
+					a->FB = -1;
+				}
 				if(pad->der && pad->der == a){
 					pad->der = aux;
 				}else{
@@ -133,6 +143,7 @@ void ArbolAVL::corregirFB(Nodo *a){
 			}else{
 				a->der = rotacionDER(a->der);
 				a->der->FB = 2;
+				cout<<"Valor de a der: "<<a->der->dato<<endl;
 				if(a->der->der->izq){
 					a->der->der->FB = 0;
 				}else{
@@ -213,6 +224,40 @@ Nodo *ArbolAVL::ajustarFB(Nodo *d, char tipo){
 					}
 				}
 			}
+		}
+	}else{
+		if(d == NULL){
+			return ajustarFB(padre_temporal,'E');
+		}else{
+			if(d->der == NULL && d->izq == NULL){
+				d->FB=0;
+			}else if(d->der){
+				d->FB = d->FB+1;
+			}else if(d->izq){
+				d->FB = d->FB-1;
+			}
+			if(d->FB > 1 || d->FB <-1){
+				return d;
+			}
+			if(d->FB == 0){
+				Nodo *pad = buscar_padre(raiz, d->dato);
+				while(pad != NULL){
+					if(pad->der == d){
+						pad->FB = pad->FB -1;
+					}else{
+						pad->FB = pad->FB +1;
+					}
+					if(pad->FB > 1 || pad->FB <-1){
+						return pad;
+					}
+					if(pad->FB != 0){
+						break;
+					}
+					d = pad;
+					pad = buscar_padre(raiz,pad->dato);
+				}
+			}
+			
 		}
 	}
 	return NULL;
@@ -387,15 +432,19 @@ void ArbolAVL::eliminar_nodo(Nodo *nodo_eliminar){
 	}
 }
 //Funcion para eliminar Nodos del arbol
-void ArbolAVL::eliminar(Nodo *arbol, int n){
+Nodo *ArbolAVL::eliminar(Nodo *arbol, int n){
 	//si el arbol esta vacio
-	if(arbol==NULL){return;}
+	if(arbol==NULL){return NULL;}
 	//si el valor es menor buscar por la izq
 	else if(n < arbol->dato){eliminar(arbol->izq,n);}
 	//si el valor es mayor buscar por la der
 	else if(n >arbol->dato){eliminar(arbol->der,n);}
 	//si ya encontraste el elemento
-	else{eliminar_nodo(arbol);}
+	else{
+		Nodo *pad = buscar_padre(raiz,arbol->dato);
+		eliminar_nodo(arbol);
+		return pad;
+	}
 }
 //funcion para determinar el nodo mas izquierdo posible
 Nodo *ArbolAVL::minimo(Nodo *arbol){
@@ -404,7 +453,11 @@ Nodo *ArbolAVL::minimo(Nodo *arbol){
 	//si tiene hijo izq buscar la parte mas izq posible
 	if(arbol->izq){return minimo(arbol->izq);}
 	//si no tiene hijo izquierdo retornamos el mismo nodo
-	else{return arbol;}
+	else{
+		padre_temporal = buscar_padre(raiz, arbol->dato);
+		arbol->FB = raiz->FB;
+		return arbol;
+	}
 }
 //funcion para reeemplazar dos nodos
 void ArbolAVL::reemplazar(Nodo *arbol, Nodo *nuevo_nodo){
@@ -417,11 +470,15 @@ void ArbolAVL::reemplazar(Nodo *arbol, Nodo *nuevo_nodo){
 				padre->izq = nuevo_nodo;
 			}
 		}
-		if(arbol->der != NULL){
+		if(padre->der != NULL){
 			if(arbol->dato == padre->der->dato){
 				padre->der = nuevo_nodo;	
 			}
 		}
+	}
+	if(nuevo_nodo){
+		Nodo *pad2 = buscar_padre(raiz,nuevo_nodo->dato);
+		pad2 = padre;
 	}
 }
 //funcion para destruir un nodo

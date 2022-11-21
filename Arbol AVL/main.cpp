@@ -16,7 +16,6 @@ int main(){
 	Queue<int> c;
 	Queue<int> c2;
 	Queue<int> c3;
-	cout<<"Arbol esta vacio? "<<a.arbol_vacio()<<endl;
 	/*a.insertar_nodo_p(10,1);
 	a.insertar_nodo_p(8,1);
 	a.insertar_nodo_p(7,1);
@@ -24,7 +23,7 @@ int main(){
 	a.insertar_nodo_p(5,1);
 	a.insertar_nodo_p(9,1);*/
 	
-	a.insertar_nodo_p(90,1);
+	/*a.insertar_nodo_p(90,1);
 	a.insertar_nodo_p(38,1);
 	a.insertar_nodo_p(40,1);
 	a.insertar_nodo_p(80,1);
@@ -41,61 +40,42 @@ int main(){
 	a.insertar_nodo_p(89,1);
 	a.insertar_nodo_p(110,1);
 	a.insertar_nodo_p(87,1);
-	//a.mostrar_arbol_p();
-	/*a.insertar_nodo_p(4,1);
-	a.insertar_nodo_p(5,1);
+	a.mostrar_arbol_p();*/
+	
+	
+	a.insertar_nodo_p(100,1);
+	a.insertar_nodo_p(90,1);
+	a.insertar_nodo_p(80,1);
+	a.insertar_nodo_p(110,1);
+	a.insertar_nodo_p(95,1);
+	a.insertar_nodo_p(120,1);
+	a.insertar_nodo_p(130,1);
+	a.insertar_nodo_p(140,1);
+	a.insertar_nodo_p(111,1);
+	a.eliminar_p(100);
+	a.insertar_nodo_p(128,1);
+	a.insertar_nodo_p(97,1);
+	a.insertar_nodo_p(85,1);
+	a.insertar_nodo_p(94,1);
+	a.insertar_nodo_p(72,1);
+	a.insertar_nodo_p(92,1);
+	a.insertar_nodo_p(76,1);
+	a.insertar_nodo_p(70,1);
+	a.insertar_nodo_p(81,1);
+	a.insertar_nodo_p(74,1);
+	a.eliminar_p(90);
+	
+	
+	/*a.insertar_nodo_p(5,1);
+	a.insertar_nodo_p(4,1);
+	a.insertar_nodo_p(7,1);
 	a.insertar_nodo_p(6,1);
-	a.insertar_nodo_p(49,1);
-	a.insertar_nodo_p(50,1);
-	a.insertar_nodo_p(58,1);
-	a.insertar_nodo_p(39,1);
-	a.insertar_nodo_p(10,1);
-	a.insertar_nodo_p(60,1);
-	
-
-	
+	a.insertar_nodo_p(8,1);
+	//a.insertar_nodo_p(3,1);
 	a.mostrar_arbol_p();
-	cout<<endl;
-	c = a.in_orden();
-	c2 = a.pre_orden();
-	c3 = a.post_orden();
-	cout<<endl;
-	c.imprimir_queue('I');
-	cout<<endl;
-	c2.imprimir_queue('I');
-	cout<<endl;
-	c3.imprimir_queue('I');
-	cout<<endl;
-	a.eliminar_p(5);
-	a.mostrar_arbol_p();
-	cout<<endl;
-	c = a.in_orden();
-	c2 = a.pre_orden();
-	c3 = a.post_orden();
-	cout<<endl;
-	c.imprimir_queue('I');
-	cout<<endl;
-	c2.imprimir_queue('I');
-	cout<<endl;
-	c3.imprimir_queue('I');*/
-
-	/*
-	 *Como el arbol es privado en la clase no se puede realizar:
-	 *Nodo *n = a.buscar_nodo_p(3);
-	 *cout<<"Buscando un nodo: "<<n->info<<endl;
-	 *debido a que tenemos un priblema de acceso a memoria negado
-	*//*
-	Nodo *n = a.buscar_nodo_p(15);
-	int i = n->dato;
-	cout<<"Buscando un nodo: "<<i<<endl;
-	/*
-	 * Nota: se pudo crear una copia desde la clase y enviarla, no obstante, resulta mas
-	 *mas util enviar la direccion ya que igualmente se puede acceder a otras posiciones
-	 *de memoria, por ejemplo:
-	*//*
-	i = n->der->dato;
-	cout<<"Buscando un nodo: "<<i<<endl;
-	cout<<"Arbol esta vacio? "<<a.arbol_vacio()<<endl;*/
+	
+	a.eliminar_p(6);*/
+	
 	return 0;
 }
 
