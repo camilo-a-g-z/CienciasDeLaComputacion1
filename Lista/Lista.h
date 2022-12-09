@@ -32,6 +32,7 @@ class Lista
 		bool ListaVacia();
 		int TamLista();
 		bool Insertar(T dato, int pos);
+		bool InsertarFinal(T dato);
 		T Eliminar(int pos);
 		T ObtenerDatos(int pos);
 		void mostrar();
@@ -92,6 +93,23 @@ bool Lista<T>::Insertar(T dato, int pos){
 	aux = cab;
 	
 	for(int i = 0; i < pos-1; i++){aux = aux->sig;}
+	aux2 = aux->sig;
+	n_n->sig = aux2;
+	aux->sig = n_n;
+	
+	tam++;
+	return true;
+}
+
+bool Lista<T>::Insertar(T dato){//insertar al final de la lista
+	//se crea nuevo nodo y variables auxiliares necesarias
+	Nodo<T> *n_n = new Nodo<T>;
+	Nodo<T> *aux, *aux2;
+	
+	n_n->info = dato;
+	aux = cab;
+	
+	for(int i = 0; i < tam; i++){aux = aux->sig;}
 	aux2 = aux->sig;
 	n_n->sig = aux2;
 	aux->sig = n_n;
